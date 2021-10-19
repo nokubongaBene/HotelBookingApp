@@ -1,0 +1,21 @@
+{
+    "info":[
+        {"name" : "Serenity Hotel", 
+            "Location": "18 Station street",
+            "image" : "https://images.unsplash.com/photo-1529290130-4ca3753253ae?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjd8fGhvdGVsfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60",
+            "Description": "Escape the city noise. Come refresh and recover from the yearly stress. At only R2500 per night."},
+        {"name" : "Sandton Hotel", 
+            "Location": "18 Smith street",
+            "image" : "https://images.unsplash.com/photo-1529290130-4ca3753253ae?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjd8fGhvdGVsfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60",
+            "Description": "Escape the city noise. Come refresh and recover from the yearly stress. At only R1500 per night."},
+        {"name" : "Queens Hotel", 
+            "Location": "18 Mandela Drive",
+            "image" : "https://images.unsplash.com/photo-1529290130-4ca3753253ae?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjd8fGhvdGVsfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60",
+            "Description": "Escape the city noise. Come refresh and recover from the yearly stress. At only R3500 per night."},
+        {"name" : "Kings Hotel", 
+            "Location": "18 Joubert street",
+            "image" : "https://images.unsplash.com/photo-1529290130-4ca3753253ae?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjd8fGhvdGVsfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60",
+            "Description": "Escape the city noise. Come refresh and recover from the yearly stress. At only R4500 per night."}
+    ]
+    
+}
