@@ -20,12 +20,12 @@ export default function HotelDescriptionModal({hotelDetails,showModal, hideModal
 
             <View>
             {/* <Image style={{height: height * 0.50, width: width * 0.85, borderRadius:15,}} source={image} /> */}
-            <Image style={{height: height * 0.50, width: width * 0.85, borderRadius:15,}} source = {{uri:hotelDetails.image}}/>
-            <Text>{hotelDetails.name}</Text>
-            <Text>{hotelDetails.Location} </Text>
-        <Text>{hotelDetails.Description} </Text>
+            <Image style={{height: height * 0.50, width: width * 0.95, borderRadius:15,}} source = {{uri:hotelDetails.image}}/>
+            <Text style={styles.header}>{hotelDetails.name}</Text>
+            <Text style={styles.previewDes}>{hotelDetails.Location} </Text>
+        <Text style={styles.previewDes}>{hotelDetails.Description} </Text>
             
-            <Text>Amenities</Text>
+            <Text style={styles.header}>Amenities</Text>
 
             <View style={styles.description}>
         

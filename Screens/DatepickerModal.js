@@ -8,13 +8,10 @@ let width= Dimensions.get('window').width
 let height= Dimensions.get('window').height
 
 
-export default function DatepickerModal({showModal}){
-    const [modalVisible, setModalVisible] = useState(false);
+export default function DatepickerModal({showModal, hideModalGF, navigation}){
     
-        const hideModal= () =>{
-            setModalVisible(false);
-        }
-    const [date, setDate] = useState();
+    
+    // const [date, setDate] = useState();
     const [checkIn, setCheckIn] = useState([]);
     const [checkOut, setCheckout] = useState([]);
     //const [dates,setDate] = useState();
@@ -42,10 +39,8 @@ export default function DatepickerModal({showModal}){
             markedDates={{
             [checkIn]: {
             selected: true, endingDay:true, color: 'green', textColor: 'gray'
-   },
- }} 
- />
-
+    },
+ }} />
         </View>
       </Modal>
     )

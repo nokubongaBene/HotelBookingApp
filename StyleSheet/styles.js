@@ -137,13 +137,13 @@ export default styles = StyleSheet.create({
     },
     description:{
         color: 'black',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position : 'absolute',
         width: width * 0.6,
-        marginLeft: width * 0.25,
+        marginLeft: width * 0.5,
         padding: 7,
-        marginHorizontal: height * 0.1
+        marginHorizontal: height * 0.15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: width * 0.2
     },
     bookingCard:{
         backgroundColor: 'white',
@@ -183,6 +183,29 @@ export default styles = StyleSheet.create({
         marginLeft: width*0.2,
         marginRight: width*0.2,
         marginTop: height * 0.05,
+    },
+    previewCards:{
+        width: width*0.89,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginVertical: 3,
+        backgroundColor: 'white',
+        marginHorizontal: 3,
+        height: height * 0.2,
+
+    },
+    header:{
+        color: 'black',
+        fontWeight: 'bold',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: 20,
+        marginLeft: width * 0.5,
+        marginTop: height * 0.02,
+    },
+    previewDes:{
+        color: 'black',
+        fontSize: 18,
     }
     
 })

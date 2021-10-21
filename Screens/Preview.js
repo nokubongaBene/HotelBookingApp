@@ -36,13 +36,15 @@ export default function Preview({navigation, }){
     
     {data.info.map((item, index) =>{
       return(
-        <View key={index}>
-        <TouchableOpacity  onPress={() => storeHotelDetails(item) }>
-          <Text style={styles.description}>{item.name}</Text>          
+        <View key={index} >
+          <View style={styles.previewCards}>
+        <TouchableOpacity  onPress={() => storeHotelDetails(item) } >
+          <Text style={styles.header}>{item.name}</Text>          
           <Text style={styles.description}>{item.Location}</Text>
           <Text style={styles.description}>{item.Description}</Text>
-          <Image style={{height: height * 0.15, width: width * 0.25, borderRadius:15,}} source={{uri:item.image}}/>
+          <Image style={{height: height * 0.15, width: width * 0.30, borderRadius:15, position: 'absolute', marginTop: 20, marginLeft: width*0.20}} source={{uri:item.image}}/>
           </TouchableOpacity>
+          </View>
         </View>
       )
     })}

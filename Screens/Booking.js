@@ -7,6 +7,7 @@ import styles from '../StyleSheet/styles';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {Picker} from '@react-native-picker/picker';
 import { Calendar, CalendarList, Agenda, LocaleConfig} from 'react-native-calendars';
+import DatepickerModal from './DatepickerModal';
 
 
 const Stack = createNativeStackNavigator();
@@ -24,10 +25,16 @@ LocaleConfig.defaultLocale = 'fr';
 
 
 export default function Booking({navigation}){
+  
+  const [modalVisible, setModalVisible] = useState(false);    
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState();
   const [kids, setKids] = useState();
   const [adults, setAdults] = useState();
+
+  const hideModal= () =>{
+    setModalVisible(false);
+}
 
   
   return(
@@ -37,7 +44,7 @@ export default function Booking({navigation}){
 <View>
 <TouchableOpacity onPress={()=> setModalVisible(true)}>
  <Text style={styles.bookingText}>Date</Text>
- 
+ <DatepickerModal showModal={modalVisible} hideModalGF={hideModal} navigation={navigation}/>
 </TouchableOpacity>
 <View>
 <Text style={styles.bookingText} >Guest(s):</Text>
