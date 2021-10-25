@@ -19,7 +19,7 @@ export default function SignIn({navigation}){
 <Text style={styles.loginTexts} >Password:</Text>
 <TextInput style={styles.input} />
     <TouchableOpacity style={styles.textLogin} onPress={() => navigation.navigate('Preview')}>
-        <Text style={styles.Login}>Sign In</Text>
+        <Text style={styles.Login}>     Sign In</Text>
         </TouchableOpacity>
 
     

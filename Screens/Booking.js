@@ -3,7 +3,6 @@ import { SafeAreaView, ScrollView,StatusBar,TextInput,TouchableHighlight,Modal, 
 import {NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator} from '@react-navigation/native-stack';
 import styles from '../StyleSheet/styles';
-// import Calendar from 'react-native-calendar-select';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {Picker} from '@react-native-picker/picker';
 import { Calendar, CalendarList, Agenda, LocaleConfig} from 'react-native-calendars';
@@ -31,6 +30,15 @@ export default function Booking({navigation}){
   const [value, setValue] = useState();
   const [kids, setKids] = useState();
   const [adults, setAdults] = useState();
+  const [checkIn, setCheckIn] = useState([]);
+  const [checkOut, setCheckout] = useState([]);
+
+  const setDate = (selectedDate) =>{
+    setCheckIn(selectedDate);
+  }
+ const setCheckoutdate = (selectedDateCheckout) =>{
+   setCheckout(selectedDateCheckout);
+ }
 
   const hideModal= () =>{
     setModalVisible(false);
@@ -38,14 +46,45 @@ export default function Booking({navigation}){
 
   
   return(
+    
     <View style={styles.bookingCard} >
     
  <Text style={styles.heading}>Room Booking</Text>
 <View>
 <TouchableOpacity onPress={()=> setModalVisible(true)}>
- <Text style={styles.bookingText}>Date</Text>
- <DatepickerModal showModal={modalVisible} hideModalGF={hideModal} navigation={navigation}/>
+<ScrollView>
+ <Text style={styles.bookingText}>Check In Date: {checkIn}</Text>
+ <Text style={styles.bookingText}>Check Out Date: {checkOut}</Text>
+ <CalendarList
+            horizontal={true}
+            pastScrollRange={0}
+            futureScrollRange={50}
+            markingType={'period'}
+            onDayPress={(day)=>{setDate(day.dateString)}}
+            onDayPress={(day)=>{setCheckoutdate(day.dateString)}} 
+            onDayLongPress={(day)=> {selectedDateCheckout (day.dateString)}}
+            //onDateChange={(day)=> setCheckout(day.dateString)}
+            markedDates={{
+            /* [checkIn]: {selected: true,startingDay:true, color: 'green', textColor: 'gray'},
+            [checkOut]: {selected: false, endingDay:true, color: 'yellow', textColor: 'gray'} */
+            [checkIn]:{startingDay: true, color:'green'},
+            [checkOut]:{selected:true,  endingDay:true, color:'green', textColor:'gray'},
+            [checkIn]:{disabled:true, startingDay:true, color:'green', endingDay:true}
+            
+ }} />
+ {/* <Text style={styles.bookingText}>Date {checkOut}</Text>
+ <Calendar
+            minDate={Date()}
+            markingType={'period'}
+            onDayPress={(day)=>{setCheckoutdate(day.dateString)}}
+            onDayLongPress={(day)=> {('selected day', day)}}
+            markedDates={{
+            [checkOut]: {selected: true, endingDay:true, color: 'green', textColor: 'gray'},
+            
+ }} /> */}
+ </ScrollView>
 </TouchableOpacity>
+
 <View>
 <Text style={styles.bookingText} >Guest(s):</Text>
 <Text style={styles.bookingText}>Adult(s)</Text>
@@ -88,10 +127,11 @@ export default function Booking({navigation}){
 </Picker>
 </View>
 </View>
- <TouchableOpacity style={styles.textLogin} onPress={() => navigation.navigate('PreviewBooking')}>
+ <TouchableOpacity style={styles.textLogin} kids={kids} adults={adults} rooms={value} onPress={() => navigation.navigate('PreviewBooking')}>
      <Text style={styles.next}>     Next -></Text>
      </TouchableOpacity>
   </View>
     </View>
+    
   )
 }

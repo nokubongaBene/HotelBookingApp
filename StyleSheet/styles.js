@@ -119,7 +119,7 @@ export default styles = StyleSheet.create({
         
     },
     preview:{
-        backgroundColor:'white',
+        backgroundColor:'black',
         width: width,
         height: height,
       
@@ -130,7 +130,7 @@ export default styles = StyleSheet.create({
 
     },
     closeText:{
-        color: 'black',
+        color: 'white',
         fontSize: 25,
         fontWeight: 'bold',
         marginLeft: width * 0.95
@@ -138,12 +138,11 @@ export default styles = StyleSheet.create({
     description:{
         color: 'black',
         width: width * 0.6,
-        marginLeft: width * 0.5,
         padding: 7,
         marginHorizontal: height * 0.15,
         justifyContent: 'center',
         alignItems: 'center',
-        marginRight: width * 0.2
+        
     },
     bookingCard:{
         backgroundColor: 'white',
@@ -157,7 +156,7 @@ export default styles = StyleSheet.create({
         fontWeight: 'bold',
         alignItems: 'center',
         justifyContent: 'center',
-        marginLeft: width * 0.1,
+        
     },
     bookingText:{
         color: 'black',
@@ -185,13 +184,15 @@ export default styles = StyleSheet.create({
         marginTop: height * 0.05,
     },
     previewCards:{
-        width: width*0.89,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        marginVertical: 3,
-        backgroundColor: 'white',
-        marginHorizontal: 3,
-        height: height * 0.2,
+       borderRadius: 6,
+       elevation: 3,
+       backgroundColor: '#fff',
+       shadowOffser: {width: width * 0.01, height: height * 0.01},
+       shadowColor: '#333',
+       shadowOpacity: 0.3,
+       shadowRadius: 2,
+       marginHorizontal: 4,
+       marginVertical: 6
 
     },
     header:{
@@ -200,12 +201,41 @@ export default styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         fontSize: 20,
-        marginLeft: width * 0.5,
+        marginLeft: width * 0.35,
         marginTop: height * 0.02,
     },
     previewDes:{
         color: 'black',
         fontSize: 18,
+    },
+    bookingDetails:{
+        color: 'black',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginHorizontal: width*  0.1,
+        marginVertical: height * 0.02,
+        fontSize: 20,
+    },
+    roomCard:{
+        width:width * 0.95,
+        backgroundColor: 'white',
+        height: height * 0.89,
+        borderRadius: 15,
+        marginLeft: width * 0.03,
+        marginBottom: height * 0.2,
+    },
+    headerRoom:{
+        color: 'black',
+        fontWeight: 'bold',
+        fontSize: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 2,
+    
+    },
+    descriptionRoom:{
+        color: 'black',
+        marginVertical: 3
     }
     
 })

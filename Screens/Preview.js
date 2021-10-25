@@ -9,7 +9,7 @@ let width= Dimensions.get('window').width
 let height= Dimensions.get('window').height
 
 const Stack = createNativeStackNavigator();
-const image = {uri: "https://images.unsplash.com/photo-1529290130-4ca3753253ae?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjd8fGhvdGVsfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60"};
+//const image = {uri: "https://images.unsplash.com/photo-1529290130-4ca3753253ae?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjd8fGhvdGVsfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60"};
 
 
 export default function Preview({navigation, }){
@@ -42,7 +42,7 @@ export default function Preview({navigation, }){
           <Text style={styles.header}>{item.name}</Text>          
           <Text style={styles.description}>{item.Location}</Text>
           <Text style={styles.description}>{item.Description}</Text>
-          <Image style={{height: height * 0.15, width: width * 0.30, borderRadius:15, position: 'absolute', marginTop: 20, marginLeft: width*0.20}} source={{uri:item.image}}/>
+          <Image style={{height: height * 0.15, width: width * 0.30, borderRadius:15, position: 'absolute', marginTop: 20,}} source={{uri:item.image}}/>
           </TouchableOpacity>
           </View>
         </View>

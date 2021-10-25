@@ -2,7 +2,12 @@ import React, {useState} from 'react';
 import { SafeAreaView, ScrollView,StatusBar,Dimensions, Modal,Image, TouchableOpacity,StyleSheet,Text,useColorScheme,View} from 'react-native';
 import {NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator} from '@react-navigation/native-stack';
+import wifi from "../images/captureall.jpeg";
 import styles from '../StyleSheet/styles';
+import data from '../Json/HotelInfo.json';
+import {icon} from 'react-native-elements';
+
+
 let width= Dimensions.get('window').width
 let height= Dimensions.get('window').height
 
@@ -12,32 +17,38 @@ export default function HotelDescriptionModal({hotelDetails,showModal, hideModal
 
     
     return(
+      <SafeAreaView>
     <Modal visible={showModal} animationType="slide">
-    <View>
+    <View style={styles.preview}>
         <TouchableOpacity style={styles.close} onPress={()=>{hideModalGF()}}>
             <Text style={styles.closeText}>X</Text>
             </TouchableOpacity>
-
-            <View>
-            {/* <Image style={{height: height * 0.50, width: width * 0.85, borderRadius:15,}} source={image} /> */}
-            <Image style={{height: height * 0.50, width: width * 0.95, borderRadius:15,}} source = {{uri:hotelDetails.image}}/>
-            <Text style={styles.header}>{hotelDetails.name}</Text>
-            <Text style={styles.previewDes}>{hotelDetails.Location} </Text>
-        <Text style={styles.previewDes}>{hotelDetails.Description} </Text>
             
-            <Text style={styles.header}>Amenities</Text>
+            {data.roomDetails.map((item, index) =>{
+      return(
+        <View key={index} >
+          <View style={styles.roomCard}>
+      
+          <Image style={{height: height * 0.50, width: width * 0.95, borderRadius:15,}} source={{uri:item.image}}/>
+          <Text style={styles.header}>{hotelDetails.name}</Text>
+          <Text style={styles.headerRoom}>{item.RoomType}</Text> 
+          <Text style={styles.descriptionRoom}>{hotelDetails.Location}</Text>          
+          <Text style={styles.descriptionRoom}>Room Number: {item.RoomNumber}</Text>
+          <Text style={styles.descriptionRoom}>Amenities:</Text>
+       {/* <ion-icon name="wifi-outline"></ion-icon> */}
+          <Image style={{height: height * 0.04, width: width * 0.50, borderRadius:15,}} source={wifi}/>
 
-            <View style={styles.description}>
-        
-            </View>
-             
-                </View>
+          <TouchableOpacity style={styles.textSign} onPress={()=> {hideModalGF();navigation.navigate('Booking')}} >
+            <Text style={styles.Login}>   Book Now</Text>
+          </TouchableOpacity>
+          </View>
+        </View>
+      )
+    })}
 
-            <TouchableOpacity style={styles.textSignIn} onPress={()=> {hideModalGF();navigation.navigate('Booking')}}>
-        <Text style={styles.signIn}>Book Now</Text>
-        </TouchableOpacity>
         </View>
 </Modal>
+</SafeAreaView>
     )
 }
 

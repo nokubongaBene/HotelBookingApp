@@ -21,7 +21,7 @@ export default function SignUp({navigation}){
 <Text style={styles.loginTexts} >Confirm Password:</Text>
 <TextInput style={styles.input} secureTextEntry={true}/>
     <TouchableOpacity style={styles.textLogin} onPress={() => navigation.navigate('Preview')}>
-        <Text style={styles.Login}>Sign Up</Text>
+        <Text style={styles.Login}>     Sign Up</Text>
         </TouchableOpacity>
 
     
