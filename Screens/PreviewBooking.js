@@ -17,6 +17,10 @@ export default function PreviewBooking({kids,adults,rooms}){
                     <Text style={styles.bookingDetails}>{item.name} {item.Surname}</Text>
                     <Text style={styles.bookingDetails}>{item.Email}</Text>
                     <Text style={styles.bookingDetails}>{item.Cellphone}</Text>
+                    <Text style={styles.bookingDetails}>Adult Guest: {item.adults}</Text>
+                    <Text style={styles.bookingDetails}>Kids Guest: {item.kids}</Text>
+                    <Text style={styles.bookingDetails}>Rooms Booked: {item.rooms}</Text>
+                    <Text style={styles.bookingDetails}> Date Booked: </Text>
                     </View>
                 )
             })}

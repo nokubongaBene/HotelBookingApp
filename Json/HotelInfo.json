@@ -37,7 +37,10 @@
                 "name": "Nokubonga",
                 "Surname": "Nkambule",
                 "Email": "benedictankambs@gmail.com",
-                "Cellphone": "0761695560"
+                "Cellphone": "0761695560",
+                "kids": "2",
+                "adults": "2",
+                "rooms": "2"
 
             }
         ]
