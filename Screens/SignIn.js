@@ -20,7 +20,7 @@ export default function SignIn({navigation}){
       .then(() => {
           //getting user info
           console.log('Logged In');
-          navigation.navigate('Preview');
+         
       }).catch(error=> {
         if (error.code === 'auth/email-already-in-use') {
           Alert.alert('That email address is already in use!');
@@ -32,7 +32,7 @@ export default function SignIn({navigation}){
             Alert.alert(error.message);
         }
       })
-     
+     // navigation.navigate('Preview');
       };
   return(
     <View style={styles.welcome}>

@@ -31,7 +31,6 @@ export default function SignUp({navigation}){
                password: password, 
                date: dateTime
               }).then(() => {
-                  // navigation.navigate('TextsPreview');
                   // Alert.alert('User account created & signed in!');
                   navigation.navigate('Preview');
               })
