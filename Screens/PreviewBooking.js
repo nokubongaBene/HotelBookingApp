@@ -7,7 +7,7 @@ import data from '../Json/HotelInfo.json';
 
 const Stack = createNativeStackNavigator();
 
-export default function PreviewBooking({kids,adults,rooms}){
+export default function PreviewBooking({navigation}){
     return(
         <View>
             {data.ClientDetails.map((item, index) =>{
@@ -25,6 +25,9 @@ export default function PreviewBooking({kids,adults,rooms}){
                 )
             })}
             
+            <TouchableOpacity style={styles.textLogin} onPress={() => navigation.navigate('Profile')}>
+     <Text style={styles.next}>     Next -></Text>
+     </TouchableOpacity>
             </View>
     )
 }

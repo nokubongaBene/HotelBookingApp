@@ -9,6 +9,7 @@ import SignUp from './Screens/SignUp';
 import Booking from './Screens/Booking';
 import Preview from './Screens/Preview';
 import PreviewBooking from './Screens/PreviewBooking';
+import Profile from './Screens/Profile';
 
 
 const Stack = createNativeStackNavigator();
@@ -37,6 +38,7 @@ export default function App({navigation}){
       <Stack.Screen name="Preview" component={Preview}/>
      <Stack.Screen name="Booking" component={Booking} />
      <Stack.Screen name="PreviewBooking" component={PreviewBooking} />
+     <Stack.Screen name="Profile" component={Profile} />
    </Stack.Navigator>
    :     
    <Stack.Navigator>  

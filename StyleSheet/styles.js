@@ -236,6 +236,30 @@ export default styles = StyleSheet.create({
     descriptionRoom:{
         color: 'black',
         marginVertical: 3
-    }
+    },
+    box:{
+        width: width * 0.5,
+       // height: height * 0.5,
+        padding: 5,
+        height: Dimensions.get('window').width / 2,
+        backgroundColor: 'black'
+      },
+      inner: {
+        flex: 1,
+        backgroundColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: 'black'
+      },
+      containerProfile: {
+        flex: 1,
+        width: width ,
+        height: height ,
+        padding: 5,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        backgroundColor: 'black',
+    
+      }
     
 })

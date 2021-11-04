@@ -30,12 +30,14 @@ export default function Preview({navigation, }){
 
     // console.log(data.info[0].name);
   return(
-    <ScrollView>
+  
       <View style={styles.preview}>
+          <ScrollView>
           <Text></Text>
     
     {data.info.map((item, index) =>{
       return(
+        <ScrollView>
         <View key={index} >
           <View style={styles.previewCards}>
         <TouchableOpacity  onPress={() => storeHotelDetails(item) } >
@@ -46,6 +48,7 @@ export default function Preview({navigation, }){
           </TouchableOpacity>
           </View>
         </View>
+        </ScrollView>
       )
     })}
 
@@ -53,8 +56,8 @@ export default function Preview({navigation, }){
 
     
 <HotelDescriptionModal hotelDetails={hotelDetails} showModal={modalVisible} hideModalGF={hideModal} navigation={navigation}/>
-
+</ScrollView>
     </View>
-    </ScrollView>
+   
   )
 }
