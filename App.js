@@ -10,6 +10,8 @@ import Booking from './Screens/Booking';
 import Preview from './Screens/Preview';
 import PreviewBooking from './Screens/PreviewBooking';
 import Profile from './Screens/Profile';
+import Admin from './Screens/Admin';
+import AdminLogIn from './Screens/AdminLogIn';
 
 
 const Stack = createNativeStackNavigator();
@@ -39,12 +41,15 @@ export default function App({navigation}){
      <Stack.Screen name="Booking" component={Booking} />
      <Stack.Screen name="PreviewBooking" component={PreviewBooking} />
      <Stack.Screen name="Profile" component={Profile} />
+      
    </Stack.Navigator>
    :     
-   <Stack.Navigator>  
+   <Stack.Navigator screenOptions={{ headerShown: false}}>  
      <Stack.Screen name="Home" component={Home} />
+     {(props) => <Home {...props} extraData={user}/>}
      <Stack.Screen name="SignIn" component={SignIn} />
    <Stack.Screen name="SignUp" component={SignUp}/> 
+   <Stack.Screen name="AdminLogIn" component={AdminLogIn} />
      </Stack.Navigator>
       }
    </NavigationContainer>

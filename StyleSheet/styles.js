@@ -69,14 +69,11 @@ export default styles = StyleSheet.create({
         marginTop: height * 0.08,
     },
     card: {
-        marginTop: height * 0.08,
-        borderRadius: 25,
         elevation: 3,
         backgroundColor: 'black',
         shadowRadius: 5,
-        width: width * 0.9,
-        marginLeft: width * 0.05,
-        height: height * 0.8
+        width: width ,
+        height: height 
 
     },
     loginTexts:{

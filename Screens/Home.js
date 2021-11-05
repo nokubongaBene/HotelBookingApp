@@ -22,6 +22,9 @@ export default Home = ({navigation}) => {
     <TouchableOpacity style={styles.textSign} onPress={() => navigation.navigate('SignIn')}>
         <Text style={styles.signUp}>Already Have An Account?</Text>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.textSign} onPress={() => navigation.navigate('AdminLogIn')}>
+        <Text style={styles.signUp}>Admin?</Text>
+        </TouchableOpacity>
 
         </View>
 </View>

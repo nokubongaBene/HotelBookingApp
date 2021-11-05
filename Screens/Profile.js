@@ -8,7 +8,7 @@ let height= Dimensions.get('window').height
 const data =[{key: 1},{key: 2},{key: 3},{key: 4},{key: 5},{key: 6},{key: 7}];
   const numColumns = 2;
   
-  export default function Profile(){
+  export default function Profile({navigation}){
     const formatData = (data, numColumns) => {
         const numRows = Math.floor(data.length / numColumns);
       
@@ -31,12 +31,13 @@ const data =[{key: 1},{key: 2},{key: 3},{key: 4},{key: 5},{key: 6},{key: 7}];
             <Text>Box 1</Text>
             </View>
           </View>
+          <TouchableOpacity onPress={() => navigation.navigate('Admin')} >
           <View style={styles.box}>
           <View style={styles.inner}>
             <Text>Box 2</Text>
             </View>
           </View>
-         
+         </TouchableOpacity>
           </ScrollView>
         </View>
         

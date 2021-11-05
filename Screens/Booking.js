@@ -7,6 +7,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import {Picker} from '@react-native-picker/picker';
 import { Calendar, CalendarList, Agenda, LocaleConfig} from 'react-native-calendars';
 import DatepickerModal from './DatepickerModal';
+import auth from '@react-native-firebase/auth';
 
 
 const Stack = createNativeStackNavigator();
@@ -44,10 +45,12 @@ export default function Booking({navigation}){
     setModalVisible(false);
 }
 
+
   
   return(
     
     <View style={styles.bookingCard} >
+      
     
  <Text style={styles.heading}>Room Booking</Text>
 <View>

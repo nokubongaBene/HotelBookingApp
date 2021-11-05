@@ -1,15 +1,29 @@
-import React, {useState, Component} from 'react';
+import React, {useState, Component, useEffect} from 'react';
 import { SafeAreaView, ScrollView,StatusBar,Modal,Image, TouchableOpacity,StyleSheet,Text,useColorScheme,View} from 'react-native';
 import {NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator} from '@react-navigation/native-stack';
 import styles from '../StyleSheet/styles';
 import data from '../Json/HotelInfo.json';
+import auth from '@react-native-firebase/auth';
 
 const Stack = createNativeStackNavigator();
 
 export default function PreviewBooking({navigation}){
+    const SignOut = () =>{
+        // auth().signOut().then(() => {
+        //   navigation.navigation('SignIn');
+        // }).catch((error) => {
+        //   alert('Oops, cannot seem to log out!')
+        // });
+      
+        auth().signOut().then(() => navigation.popToTop('SignIn'))
+        
+      }
     return(
         <View>
+            <TouchableOpacity style={styles.closes} onPress={()=>SignOut()}>
+        <Text style={styles.closeText}>X</Text>
+        </TouchableOpacity>
             {data.ClientDetails.map((item, index) =>{
                 return(
                     <View key={index}>
