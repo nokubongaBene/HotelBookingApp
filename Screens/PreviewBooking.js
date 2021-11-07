@@ -16,7 +16,7 @@ export default function PreviewBooking({navigation}){
         //   alert('Oops, cannot seem to log out!')
         // });
       
-        auth().signOut().then(() => navigation.popToTop('SignIn'))
+        auth().signOut().then(() => navigation.replace({Home}))
         
       }
     return(

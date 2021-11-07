@@ -9,7 +9,7 @@ import database from '@react-native-firebase/database';
 const Stack = createNativeStackNavigator();
 
 
-export default function SignUp({navigation}){
+export default function AdminReg({navigation}){
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirmp] = useState('');
@@ -28,12 +28,12 @@ export default function SignUp({navigation}){
           //pushing or setting user to details
           database().ref('Users/' + user.uid).set({
               email: email,
-               password: password,
-               userRole: 'Client', 
+               password: password, 
                date: dateTime,
+               userRole: 'Admin',
               }).then(() => {
                   // Alert.alert('User account created & signed in!');
-                  navigation.navigate('Preview');
+                  navigation.navigate('Admin');
               })
       })
       .catch(error => {
@@ -66,6 +66,10 @@ export default function SignUp({navigation}){
 <TextInput style={styles.input} secureTextEntry={true}/>
     <TouchableOpacity style={styles.textLogin} onPress={() => handleSignUp()}>
         <Text style={styles.Login}>     Sign Up</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.textSign} onPress={() => navigation.navigate('AdminLogIn')}>
+        <Text style={styles.signUp}>Already Have An Account?</Text>
         </TouchableOpacity>
 
     

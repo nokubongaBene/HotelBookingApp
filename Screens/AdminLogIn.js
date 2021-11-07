@@ -9,7 +9,7 @@ import database from '@react-native-firebase/database';
 const Stack = createNativeStackNavigator();
 
 
-export default function SignIn({navigation}){
+export default function AdminLogIn({navigation}){
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

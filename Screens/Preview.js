@@ -1,11 +1,12 @@
 import React, {useState, Component, useEffect} from 'react';
-import { SafeAreaView, ScrollView,StatusBar,Modal,useLayoutEffect, Image,Dimensions, TouchableOpacity,StyleSheet,Text,useColorScheme,View} from 'react-native';
+import { SafeAreaView, ScrollView,StatusBar,Modal,useLayoutEffect,Alert, Image,Dimensions, TouchableOpacity,StyleSheet,Text,useColorScheme,View} from 'react-native';
 import {NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator} from '@react-navigation/native-stack';
 import styles from '../StyleSheet/styles';
 import HotelDescriptionModal from './HotelDescriptionModal';
 import data from '../Json/HotelInfo.json';
 import auth from '@react-native-firebase/auth';
+import database from '@react-native-firebase/database';
 let width= Dimensions.get('window').width
 let height= Dimensions.get('window').height
 
@@ -29,6 +30,22 @@ export default function Preview({navigation }){
     //To display hotel info on the modal Description
     const [hotelDetails, setHotelDetails] = useState({});
 
+    const handleDatabase=()=>{
+
+      for(let i=0; i < data.info.length; i++ ){
+      let item = data.info[i]      
+        database().ref('Hotels/' ).push({
+          name: item.name,
+          Location: item.Location,
+          image: item.image,
+          Description: item.Description
+                }).then(() => {
+                    console.log('Hotel Added!');
+                   
+                })
+      }
+     
+    }
     //storing the data of the hotel
     const storeHotelDetails =(item) =>{
       console.log(item);
@@ -47,7 +64,7 @@ export default function Preview({navigation }){
       //   alert('Oops, cannot seem to log out!')
       // });
 
-      auth().signOut().then(() => navigation.popToTop('SignIn'))
+      auth().signOut().then(()=>console.log('Signed Out'));
       
     }
     // console.log(data.info[0].name);
@@ -61,6 +78,15 @@ export default function Preview({navigation }){
           <Text> </Text>
     
     {data.info.map((item, index) =>{
+      {/* database().ref('Hotels/' + 'hotel').set({
+        name: item.name,
+        Location: item.Location,
+        image: item.image,
+        Description: item.Description
+              }).then(() => {
+                 // Alert.alert('User account created & signed in!');
+                 
+              }) */}
       return(
         <ScrollView>
         <View key={index} >

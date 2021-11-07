@@ -12,6 +12,7 @@ import PreviewBooking from './Screens/PreviewBooking';
 import Profile from './Screens/Profile';
 import Admin from './Screens/Admin';
 import AdminLogIn from './Screens/AdminLogIn';
+import AdminReg from './Screens/AdminReg';
 
 
 const Stack = createNativeStackNavigator();
@@ -29,6 +30,8 @@ export default function App({navigation}){
     auth().onAuthStateChanged(user => {
       if(user){
         setLogIn(true);
+      }else {
+        setLogIn(false);
       }
     })
   }
@@ -46,10 +49,10 @@ export default function App({navigation}){
    :     
    <Stack.Navigator screenOptions={{ headerShown: false}}>  
      <Stack.Screen name="Home" component={Home} />
-     {(props) => <Home {...props} extraData={user}/>}
      <Stack.Screen name="SignIn" component={SignIn} />
    <Stack.Screen name="SignUp" component={SignUp}/> 
-   <Stack.Screen name="AdminLogIn" component={AdminLogIn} />
+   <Stack.Screen name="AdminReg" component={AdminReg} />
+   <Stack.Screen name="Admin" component={Admin} />
      </Stack.Navigator>
       }
    </NavigationContainer>
