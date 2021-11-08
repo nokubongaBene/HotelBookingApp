@@ -13,6 +13,7 @@ import Profile from './Screens/Profile';
 import Admin from './Screens/Admin';
 import AdminLogIn from './Screens/AdminLogIn';
 import AdminReg from './Screens/AdminReg';
+import database from '@react-native-firebase/database';
 
 
 const Stack = createNativeStackNavigator();
@@ -20,16 +21,27 @@ const Stack = createNativeStackNavigator();
 
 export default function App({navigation}){
   const [loggedIn, setLogIn] = useState(false);
+  const [userDetails, setUserDetails] = useState({});
 
   useEffect(() => {
     handleAuth();
   },[])
 
+  const getUserDetails = () =>{
+    let user = auth().currentUser;
+    database().ref('Users/' + user.uid).on('value', snapshot => {
+      setUserDetails(snapshot.val());
+      setLogIn(true);
+      
+    })
+    
+    console.log(user);
+  }
 
   const handleAuth = () =>{
     auth().onAuthStateChanged(user => {
       if(user){
-        setLogIn(true);
+       getUserDetails();
       }else {
         setLogIn(false);
       }
@@ -39,6 +51,11 @@ export default function App({navigation}){
   return(
     <NavigationContainer>
       {loggedIn ? 
+        userDetails.userRole === 'Admin' ? 
+      <Stack.Navigator screenOptions={{ headerShown: false}}>
+      <Stack.Screen name="Admin" component={Admin} />
+      </Stack.Navigator>
+      :
       <Stack.Navigator screenOptions={{ headerShown: false}}>
       <Stack.Screen name="Preview" component={Preview}/>
      <Stack.Screen name="Booking" component={Booking} />
@@ -46,13 +63,14 @@ export default function App({navigation}){
      <Stack.Screen name="Profile" component={Profile} />
       
    </Stack.Navigator>
-   :     
+   :  
+    
    <Stack.Navigator screenOptions={{ headerShown: false}}>  
      <Stack.Screen name="Home" component={Home} />
      <Stack.Screen name="SignIn" component={SignIn} />
    <Stack.Screen name="SignUp" component={SignUp}/> 
    <Stack.Screen name="AdminReg" component={AdminReg} />
-   <Stack.Screen name="Admin" component={Admin} />
+ 
      </Stack.Navigator>
       }
    </NavigationContainer>

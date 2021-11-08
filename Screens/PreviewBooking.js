@@ -15,8 +15,8 @@ export default function PreviewBooking({navigation}){
         // }).catch((error) => {
         //   alert('Oops, cannot seem to log out!')
         // });
-      
-        auth().signOut().then(() => navigation.replace({Home}))
+  
+        auth().signOut().then(()=>console.log('Signed Out'));
         
       }
     return(
