@@ -28,7 +28,15 @@
             {"RoomType": "Standard Suite",
                 "RoomNumber": "201 ",
                 "image" : "https://images.unsplash.com/photo-1521783988139-89397d761dce?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1025&q=80",
-                "Amenities": "Escape the city noise. Come refresh and recover from the yearly stress. At only R2500 per night."}
+                "Amenities": "Escape the city noise. Come refresh and recover from the yearly stress. At only R2500 per night."},
+                {"RoomType": "Basic Room",
+                    "RoomNumber": "101 ",
+                    "image" : "https://images.unsplash.com/photo-1521783988139-89397d761dce?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1025&q=80",
+                    "Amenities": "Escape the city noise. Come refresh and recover from the yearly stress. At only R2500 per night."},
+                    {"RoomType": "Luxury Suite",
+                        "RoomNumber": "404 ",
+                        "image" : "https://images.unsplash.com/photo-1521783988139-89397d761dce?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1025&q=80",
+                        "Amenities": "Escape the city noise. Come refresh and recover from the yearly stress. At only R2500 per night."}
             
         ],
 

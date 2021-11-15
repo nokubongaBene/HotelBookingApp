@@ -14,6 +14,7 @@ import Admin from './Screens/Admin';
 import AdminLogIn from './Screens/AdminLogIn';
 import AdminReg from './Screens/AdminReg';
 import database from '@react-native-firebase/database';
+import AddHotel from './Screens/AddHotel';
 
 
 const Stack = createNativeStackNavigator();
@@ -54,6 +55,7 @@ export default function App({navigation}){
         userDetails.userRole === 'Admin' ? 
       <Stack.Navigator screenOptions={{ headerShown: false}}>
       <Stack.Screen name="Admin" component={Admin} />
+      <Stack.Screen name="AddHotel" component={AddHotel} />
       </Stack.Navigator>
       :
       <Stack.Navigator screenOptions={{ headerShown: false}}>

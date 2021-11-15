@@ -257,6 +257,9 @@ export default styles = StyleSheet.create({
         flexWrap: 'wrap',
         backgroundColor: 'black',
     
+      },
+      buttonContainer:{
+          marginTop: height * 0.2,
       }
     
 })
