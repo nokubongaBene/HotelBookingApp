@@ -142,7 +142,7 @@ export default styles = StyleSheet.create({
         
     },
     bookingCard:{
-        backgroundColor: 'white',
+        backgroundColor: 'black',
         width: width,
         height: height,
 
@@ -166,10 +166,10 @@ export default styles = StyleSheet.create({
         marginTop: height *0.5,
     },
     next:{
-        color: 'black',
+        color: 'white',
         fontWeight: 'bold',
         alignItems: 'center',
-        fontSize: 25,
+        fontSize: 30,
         marginLeft: width * 0.1,
         marginHorizontal: 3,
         borderRadius: 6,
@@ -260,6 +260,33 @@ export default styles = StyleSheet.create({
       },
       buttonContainer:{
           marginTop: height * 0.2,
+      },
+      add:{
+          
+          color: 'white',
+          backgroundColor: 'red',
+          width: width * 0.1,
+          height: height * 0.1,
+          borderRadius: 20,
+        
+
+      },
+      addText:{
+          color:'black',
+          fontSize:45,
+          backgroundColor: 'blue',
+          width: width * 0.1,
+          height: height * 0.1,
+          justifyContent: 'center',
+          alignContent: 'center',
+          marginLeft: width * 0.45,
+          borderRadius: 40,
+      },
+      buttonBlue:{
+          width: width * 0.5,
+          justifyContent: 'center',
+          alignContent: 'center',
+          
       }
     
 })

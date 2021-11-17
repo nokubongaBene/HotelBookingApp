@@ -6,8 +6,9 @@ import styles from '../StyleSheet/styles';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {Picker} from '@react-native-picker/picker';
 import { Calendar, CalendarList, Agenda, LocaleConfig} from 'react-native-calendars';
-import DatepickerModal from './DatepickerModal';
+import PaymentModal from './PaymentModal';
 import auth from '@react-native-firebase/auth';
+import database from '@react-native-firebase/database';
 
 
 const Stack = createNativeStackNavigator();
@@ -33,6 +34,11 @@ export default function Booking({navigation}){
   const [adults, setAdults] = useState();
   const [checkIn, setCheckIn] = useState([]);
   const [checkOut, setCheckout] = useState([]);
+  const [name, setName] = useState();
+  const [surname, setSurname] = useState();
+  const [email,setEmail] = useState();
+  const [cellphone, setPhone] = useState();
+  const [address,setAddress] = useState();
 
   const setDate = (selectedDate) =>{
     setCheckIn(selectedDate);
@@ -46,19 +52,53 @@ export default function Booking({navigation}){
 }
 
 
+const handleDatabase=()=>{     
+  database().ref('Booking/'  ).push({
+    uid:auth().currentUser.uid,
+    checkIn: checkIn,
+    checkOut: checkOut,
+    name:name,
+    surname:surname,
+    email:email,
+    cellphone:cellphone,
+    address:address,
+    Kids: kids,
+    Adults:adults,
+    rooms:value,
+          }).then(() => {
+              console.log('Booking Added!');
+              setModalVisible(true);
+          })
+
+         // navigation.navigate('Payment')
+        
+}
+
+
   
   return(
-    
+   
     <View style={styles.bookingCard} >
-      
+     <ScrollView>  
     
  <Text style={styles.heading}>Room Booking</Text>
 <View>
-<TouchableOpacity onPress={()=> setModalVisible(true)}>
-<ScrollView>
- <Text style={styles.bookingText}>Check In Date: {checkIn}</Text>
- <Text style={styles.bookingText}>Check Out Date: {checkOut}</Text>
- <CalendarList
+
+ <Text style={styles.loginTexts}>Check In Date: {checkIn}</Text>
+ <TextInput style={styles.input} onChangeText={setCheckIn} value={checkIn} />
+ <Text style={styles.loginTexts}>Check Out Date: {checkOut}</Text>
+ <TextInput style={styles.input} onChangeText={setCheckout} value={checkOut} />
+ <Text style={styles.loginTexts}>Guest Name:</Text>
+ <TextInput style={styles.input} onChangeText={setName} value={name} />
+ <Text style={styles.loginTexts}>Guest Surname: </Text>
+ <TextInput style={styles.input} onChangeText={setSurname} value={surname} />
+ <Text style={styles.loginTexts}>Email:</Text>
+ <TextInput style={styles.input} onChangeText={setEmail} value={email} />
+ <Text style={styles.loginTexts}>Cellphone:</Text>
+ <TextInput style={styles.input} keyboardType='numeric' onChangeText={setPhone} value={cellphone} />
+ <Text style={styles.loginTexts}>Enter Address:</Text>
+ <TextInput style={styles.input} onChangeText={setAddress} value={address} />
+ {/* <CalendarList
             horizontal={true}
             pastScrollRange={0}
             futureScrollRange={50}
@@ -69,12 +109,12 @@ export default function Booking({navigation}){
             //onDateChange={(day)=> setCheckout(day.dateString)}
             markedDates={{
             /* [checkIn]: {selected: true,startingDay:true, color: 'green', textColor: 'gray'},
-            [checkOut]: {selected: false, endingDay:true, color: 'yellow', textColor: 'gray'} */
+            [checkOut]: {selected: false, endingDay:true, color: 'yellow', textColor: 'gray'}
             [checkIn]:{startingDay: true, color:'green'},
             [checkOut]:{selected:true,  endingDay:true, color:'green', textColor:'gray'},
             [checkIn]:{disabled:true, startingDay:true, color:'green', endingDay:true}
             
- }} />
+ }} /> */}
  {/* <Text style={styles.bookingText}>Date {checkOut}</Text>
  <Calendar
             minDate={Date()}
@@ -85,14 +125,14 @@ export default function Booking({navigation}){
             [checkOut]: {selected: true, endingDay:true, color: 'green', textColor: 'gray'},
             
  }} /> */}
- </ScrollView>
-</TouchableOpacity>
+
 
 <View>
-<Text style={styles.bookingText} >Guest(s):</Text>
-<Text style={styles.bookingText}>Adult(s)</Text>
+<Text style={styles.loginTexts} >Guest(s):</Text>
+<Text style={styles.loginTexts}>Adult(s)</Text>
 <Picker
   selectedValue ={adults}
+  style={{color: 'white'}}
   onValueChange={(itemValue, itemIndex)=>
   setAdults(itemValue)}>
 <Picker.Item label="1" value="1"/>
@@ -102,9 +142,10 @@ export default function Booking({navigation}){
 <Picker.Item label="5" value="5"/>
 <TextInput style={styles.input} />
 </Picker>
-<Text style={styles.bookingText}>Kid(s)</Text>
+<Text style={styles.loginTexts}>Kid(s)</Text>
 <Picker
   selectedValue ={kids}
+  style={{color: 'white'}}
   onValueChange={(itemValue, itemIndex)=>
   setKids(itemValue)}>
 <Picker.Item label="1" value="1"/>
@@ -116,9 +157,10 @@ export default function Booking({navigation}){
 </Picker>
 
 <View>
-<Text style={styles.bookingText}>Room(s)</Text>
+<Text style={styles.loginTexts}>Room(s)</Text>
 <Picker
   selectedValue ={value}
+  style={{color: 'white'}}
   onValueChange={(itemValue, itemIndex)=>
   setValue(itemValue)}>
 <Picker.Item label="1" value="1"/>
@@ -130,11 +172,13 @@ export default function Booking({navigation}){
 </Picker>
 </View>
 </View>
- <TouchableOpacity style={styles.textLogin} kids={kids} adults={adults} rooms={value} onPress={() => navigation.navigate('PreviewBooking')}>
+ <TouchableOpacity style={styles.textLogin} kids={kids} adults={adults} rooms={value} onPress={() => handleDatabase()}>
      <Text style={styles.next}>     Next -></Text>
+     <PaymentModal  showModal={modalVisible} hideModalGF={hideModal} navigation={navigation}/>
      </TouchableOpacity>
   </View>
+  </ScrollView>
     </View>
-    
+   
   )
 }

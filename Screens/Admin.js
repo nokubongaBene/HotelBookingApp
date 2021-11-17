@@ -22,10 +22,6 @@ export default function Admin({navigation, }){
     retrieveRooms();
    //handleDatabase();
   },[])
-
-  const handleAddRoom=()=>{
-
-  }
   
       const handleDatabase=()=>{
   
@@ -37,7 +33,7 @@ export default function Admin({navigation, }){
             image: item.image,
             Amenities: item.Amenities
                   }).then(() => {
-                      console.log('Hotel Added!');
+                      console.log('Rooms Added!');
                      
                   })
         }
@@ -67,13 +63,7 @@ export default function Admin({navigation, }){
           
         })
       }
-      const handleUpdate = () =>{
-        database().ref('Rooms/' + item.key).update({
-          RoomType: RoomType,
-          RoomNumber: RoomNumber,
-          Amenities: Amenities
-        })
-      }
+      
 
     const handleDelete = (item) =>{
       Alert.alert(
@@ -108,19 +98,21 @@ export default function Admin({navigation, }){
      
         <View key={item.key} >
           <View style={styles.previewCards}>
-        <TouchableOpacity  onPress={()=> navigation.navigate('AddHotel', {
-          RoomType:RoomType,
-          RoomNumber: RoomNumber,
-          Amenities: Amenities,
-          })} >
+        <TouchableOpacity   >
           <Text style={styles.header}>{item.RoomType}</Text>          
           <Text style={styles.description}>{item.RoomNumber}</Text>
           <Text style={styles.description}>{item.Amenities}</Text>
           <Image style={{height: height * 0.04, width: width * 0.50, borderRadius:15, marginLeft: width*0.30}} source={wifi}/>
           
-              <Button title="Update" color='black' onPress={()=> handleUpdate()}  /> 
-              <Button title="Delete" onPress={()=> handleDelete(item)} />
-
+              
+              <Button title='Update' color='black' onPress={()=> navigation.navigate('AddHotel',{
+                title:'Update ',
+                buttonText:'Update',
+                key: item.key,
+                RoomType:item.RoomType,
+                RoomNumber: item.RoomNumber,
+                Amenities: item.Amenities,})}/>
+                <Button title="Delete" style={styles.buttonBlue} onPress={()=> handleDelete(item)} />
           <Image style={{height: height * 0.25, width: width * 0.32, borderRadius:15, position: 'absolute', marginTop: 20,}} source={{uri:item.image}}/> 
           </TouchableOpacity>
           </View>
@@ -139,15 +131,22 @@ export default function Admin({navigation, }){
       <View style={styles.preview}>
           
           <Text></Text>
-    
+    <ScrollView>
    {displayRoomDetails()}
 
-   
+   </ScrollView>
 
- 
-<TouchableOpacity >
-      <Text>Add Hotel </Text>
-      </TouchableOpacity>
+   <TouchableOpacity style={styles.Add} onPress={() => navigation.navigate('AddHotel', {
+     title:'Add Room',
+     buttonText:'Add',
+          key: "",
+          RoomType:"",
+          RoomNumber: "",
+          Amenities: "",})}>
+   <Text style={styles.addText}>+</Text>
+   </TouchableOpacity>
+   
+      
 </View>
 </View>
 </ScrollView>

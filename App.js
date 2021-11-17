@@ -56,10 +56,11 @@ export default function App({navigation}){
       <Stack.Navigator screenOptions={{ headerShown: false}}>
       <Stack.Screen name="Admin" component={Admin} />
       <Stack.Screen name="AddHotel" component={AddHotel} />
+      <Stack.Screen name="Profile" component={Profile} />
       </Stack.Navigator>
       :
       <Stack.Navigator screenOptions={{ headerShown: false}}>
-      <Stack.Screen name="Preview" component={Preview}/>
+    <Stack.Screen name="Preview" component={Preview}/>
      <Stack.Screen name="Booking" component={Booking} />
      <Stack.Screen name="PreviewBooking" component={PreviewBooking} />
      <Stack.Screen name="Profile" component={Profile} />

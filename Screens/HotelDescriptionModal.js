@@ -39,7 +39,7 @@ export default function HotelDescriptionModal({hotelDetails,showModal, hideModal
           <Image style={{height: height * 0.04, width: width * 0.50, borderRadius:15,}} source={wifi}/>
 
           <TouchableOpacity style={styles.textSign} onPress={()=> {hideModalGF();navigation.navigate('Booking')}} >
-            <Text style={styles.Login}>   Book Now</Text>
+            <Text style={styles.Login}>   Book Now  nhjhjjj</Text>
           </TouchableOpacity>
           </View>
         </View>
