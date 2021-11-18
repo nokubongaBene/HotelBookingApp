@@ -8,13 +8,14 @@ import SignIn from './Screens/SignIn';
 import SignUp from './Screens/SignUp';
 import Booking from './Screens/Booking';
 import Preview from './Screens/Preview';
-import PreviewBooking from './Screens/PreviewBooking';
+import ClientBookings from './Screens/ClientBookings';
 import Profile from './Screens/Profile';
 import Admin from './Screens/Admin';
 import AdminLogIn from './Screens/AdminLogIn';
 import AdminReg from './Screens/AdminReg';
 import database from '@react-native-firebase/database';
 import AddHotel from './Screens/AddHotel';
+import adminProfile from './Screens/adminProfile';
 
 
 const Stack = createNativeStackNavigator();
@@ -57,12 +58,13 @@ export default function App({navigation}){
       <Stack.Screen name="Admin" component={Admin} />
       <Stack.Screen name="AddHotel" component={AddHotel} />
       <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="adminProfile" component={adminProfile} />
       </Stack.Navigator>
       :
       <Stack.Navigator screenOptions={{ headerShown: false}}>
     <Stack.Screen name="Preview" component={Preview}/>
      <Stack.Screen name="Booking" component={Booking} />
-     <Stack.Screen name="PreviewBooking" component={PreviewBooking} />
+     <Stack.Screen name="ClientBookings" component={ClientBookings} />
      <Stack.Screen name="Profile" component={Profile} />
       
    </Stack.Navigator>

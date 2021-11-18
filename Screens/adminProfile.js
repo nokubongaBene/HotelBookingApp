@@ -5,15 +5,33 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import profile from "../images/profile.jpeg";
 let width= Dimensions.get('window').width
 let height= Dimensions.get('window').height
 
-export default function Profile({navigation}){
+export default function adminProfile({navigation}){
 
-  
-  const [displayBooking, setDisplayBooking] = useState([]);
+  const [adminName, setAdminName] = useState();
+  const [adminSurname, setAdminSurname] = useState();
+  const [role, setRole] = useState();
+  const [hotel, setHotel] = useState();
+  const [displayUser, setDisplayUser] = useState([]);
 
+  const handleDatabase=()=>{     
+    database().ref('Users/' ).push({
+        uid: auth().currentUser.uid,
+      adminName: 'Asanda',
+      adminSurname: 'Nkambule',
+      UserRole: 'Admin',
+      hotel:'Serenity Hotel'
+            }).then(() => {
+                console.log('Rooms Added!');
+                navigation.navigate('Profile');
+               
+            })
+
+            //console.log(RoomNumber);
+            
+  }
   const SignOut = () =>{
     // auth().signOut().then(() => {
     //   navigation.navigation('SignIn');
@@ -24,48 +42,42 @@ export default function Profile({navigation}){
     auth().signOut().then(()=>console.log('Signed Out'));
     
   }
-  const getUserBooking=()=>{
-    database().ref('Booking/').on('value', snapshot => {
+  const getUser=()=>{
+    database().ref('Users/').on('value', snapshot => {
       if(snapshot.val() !== null || snapshot.val() !== undefined){
-          let bookings = snapshot.val();
-          let keys = Object.keys(bookings);
+          let users = snapshot.val();
+          let keys = Object.keys(users);
           let temp = new Array();
 
          
         for(let i = 0; i<keys.length; i++){
-          let tempBooking = bookings[keys[i]];
-          tempBooking.key = keys[i];
-          console.log(tempBooking);
+          let tempUser = users[keys[i]];
+          tempUser.key = keys[i];
+          console.log(tempUser);
 
-          if(tempBooking.uid === auth().currentUser.uid){
-            temp.push(tempBooking)
-          }else {
-            temp.push(tempBooking);
-            //Alert.alert('No bookings for this user.');
-           
+          if(tempUser.uid === auth().currentUser.uid ){
+            temp.push(tempUser)
           }
           //navigation.navigate('Admin');
         }
         console.log("temp is ",temp);
-        setDisplayBooking(temp);
+        setDisplayUser(temp);
       }
     })
   }
 
-  const getDisplayBooking =() =>{
-    return displayBooking.map((item, index) =>{
+  const getDisplay =() =>{
+    return displayUser.map((item, index) =>{
       return(
         <ScrollView>
         <View key={item.key}>
           <ScrollView>
-           <Text style={styles.headerProfile}>Previous Booking</Text>
-                    <Text style={styles.bookingDetails}>{item.name} {item.surname}</Text>
+           <Text style={styles.header}>Previous Booking</Text>
                     <Text style={styles.bookingDetails}>{item.email}</Text>
-                    <Text style={styles.bookingDetails}>{item.cellphone}</Text>
-                    <Text style={styles.bookingDetails}>Adult Guest: {item.Adults}</Text>
-                    <Text style={styles.bookingDetails}>Kids Guest: {item.Kids}</Text>
-                    <Text style={styles.bookingDetails}>Rooms Booked: {item.rooms}</Text>
-                    <Text style={styles.bookingDetails}> Date Booked:{item.checkIn} - {item.checkOut} </Text>
+                    <Text style={styles.bookingDetails}>{item.adminName} {item.adminSurname}</Text>
+                    <Text style={styles.bookingDetails}></Text>
+                    <Text style={styles.bookingDetails}>{item.role}</Text>
+                    
                     </ScrollView>
           </View>
           </ScrollView>
@@ -73,7 +85,8 @@ export default function Profile({navigation}){
     })}
 
     useEffect(() => {
-      getUserBooking();
+      getUser();
+ //handleDatabase();
     },[])
 
     
@@ -83,10 +96,11 @@ export default function Profile({navigation}){
         <Text style={styles.closeText}>X</Text>
         
         </TouchableOpacity>
-        <Image style={{height: height * 0.04, width: width * 0.05, borderRadius:15, marginLeft: width*0.30}} source={profile}/>
-
+        <Text style={styles.loginText}>Profile
+          <Icon name="edit" size={30} color='white' /> Profile
+          </Text>
         <ScrollView>
-        {getDisplayBooking()}
+        {getDisplay()}
         </ScrollView>
       </View>
     )

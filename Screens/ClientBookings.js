@@ -5,11 +5,10 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import profile from "../images/profile.jpeg";
 let width= Dimensions.get('window').width
 let height= Dimensions.get('window').height
 
-export default function Profile({navigation}){
+export default function PreviewBooking({navigation}){
 
   
   const [displayBooking, setDisplayBooking] = useState([]);
@@ -39,10 +38,6 @@ export default function Profile({navigation}){
 
           if(tempBooking.uid === auth().currentUser.uid){
             temp.push(tempBooking)
-          }else {
-            temp.push(tempBooking);
-            //Alert.alert('No bookings for this user.');
-           
           }
           //navigation.navigate('Admin');
         }
@@ -58,7 +53,7 @@ export default function Profile({navigation}){
         <ScrollView>
         <View key={item.key}>
           <ScrollView>
-           <Text style={styles.headerProfile}>Previous Booking</Text>
+           <Text style={styles.headerProfile}>Booking</Text>
                     <Text style={styles.bookingDetails}>{item.name} {item.surname}</Text>
                     <Text style={styles.bookingDetails}>{item.email}</Text>
                     <Text style={styles.bookingDetails}>{item.cellphone}</Text>
@@ -83,8 +78,9 @@ export default function Profile({navigation}){
         <Text style={styles.closeText}>X</Text>
         
         </TouchableOpacity>
-        <Image style={{height: height * 0.04, width: width * 0.05, borderRadius:15, marginLeft: width*0.30}} source={profile}/>
-
+        <Text style={styles.loginText}>Profile
+          <Icon name="edit" size={30} color='white' /> Profile
+          </Text>
         <ScrollView>
         {getDisplayBooking()}
         </ScrollView>

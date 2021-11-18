@@ -17,6 +17,7 @@ export default function Admin({navigation, }){
   const [RoomType, setRoomType] = useState();
   const [RoomNumber, setRoomNumber] = useState();
   const [Amenities, setAmenities] = useState();
+  const [image, setImage] = useState();
 
   useEffect(() => {
     retrieveRooms();
@@ -30,8 +31,8 @@ export default function Admin({navigation, }){
           database().ref('Rooms/' ).push({
             RoomType: item.RoomType,
             RoomNumber: item.RoomNumber,
-            image: item.image,
-            Amenities: item.Amenities
+            Amenities: item.Amenities,
+            image: item.image
                   }).then(() => {
                       console.log('Rooms Added!');
                      
@@ -98,7 +99,7 @@ export default function Admin({navigation, }){
      
         <View key={item.key} >
           <View style={styles.previewCards}>
-        <TouchableOpacity   >
+        <TouchableOpacity  onPress={()=> navigation.navigate('adminProfile')} >
           <Text style={styles.header}>{item.RoomType}</Text>          
           <Text style={styles.description}>{item.RoomNumber}</Text>
           <Text style={styles.description}>{item.Amenities}</Text>
@@ -111,7 +112,8 @@ export default function Admin({navigation, }){
                 key: item.key,
                 RoomType:item.RoomType,
                 RoomNumber: item.RoomNumber,
-                Amenities: item.Amenities,})}/>
+                Amenities: item.Amenities,
+                image: item.image})}/>
                 <Button title="Delete" style={styles.buttonBlue} onPress={()=> handleDelete(item)} />
           <Image style={{height: height * 0.25, width: width * 0.32, borderRadius:15, position: 'absolute', marginTop: 20,}} source={{uri:item.image}}/> 
           </TouchableOpacity>
@@ -142,7 +144,8 @@ export default function Admin({navigation, }){
           key: "",
           RoomType:"",
           RoomNumber: "",
-          Amenities: "",})}>
+          Amenities: "",
+          image:""})}>
    <Text style={styles.addText}>+</Text>
    </TouchableOpacity>
    

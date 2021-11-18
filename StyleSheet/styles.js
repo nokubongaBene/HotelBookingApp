@@ -206,12 +206,12 @@ export default styles = StyleSheet.create({
         fontSize: 18,
     },
     bookingDetails:{
-        color: 'black',
+        color: 'white',
         justifyContent: 'center',
         alignItems: 'center',
         marginHorizontal: width*  0.1,
         marginVertical: height * 0.02,
-        fontSize: 20,
+        fontSize: 15,
     },
     roomCard:{
         width:width * 0.95,
@@ -272,7 +272,7 @@ export default styles = StyleSheet.create({
 
       },
       addText:{
-          color:'black',
+          color:'white',
           fontSize:45,
           backgroundColor: 'blue',
           width: width * 0.1,
@@ -286,7 +286,16 @@ export default styles = StyleSheet.create({
           width: width * 0.5,
           justifyContent: 'center',
           alignContent: 'center',
-          
+          alignSelf:'center',
+      },
+      headerProfile:{
+        color: 'white',
+        fontWeight: 'bold',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: 20,
+        marginLeft: width * 0.35,
+        marginTop: height * 0.02,
       }
     
 })
