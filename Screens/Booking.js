@@ -9,6 +9,7 @@ import { Calendar, CalendarList, Agenda, LocaleConfig} from 'react-native-calend
 import PaymentModal from './PaymentModal';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
+import DatePicker from 'react-native-datepicker';
 
 
 const Stack = createNativeStackNavigator();
@@ -96,9 +97,56 @@ const handleDatabase=()=>{
 <View>
 
  <Text style={styles.loginTexts}>Check In Date: {checkIn}</Text>
- <TextInput style={styles.input} onChangeText={setCheckIn} value={checkIn} />
+ <DatePicker
+        style={{width: 200}}
+        date={checkIn.date}
+        mode="date"
+        placeholder="select date"
+        format="YYYY-MM-DD"
+        minDate="2016-05-01"
+        maxDate="2016-06-01"
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
+        customStyles={{
+          dateIcon: {
+            position: 'absolute',
+            left: 0,
+            top: 4,
+            marginLeft: 0
+          },
+          dateInput: {
+            marginLeft: 36
+          }
+          // ... You can check the source to find the other keys.
+        }}
+        onDateChange={() => {setCheckIn({date: date})}}
+      />
+
  <Text style={styles.loginTexts}>Check Out Date: {checkOut}</Text>
- <TextInput style={styles.input} onChangeText={setCheckout} value={checkOut} />
+ <DatePicker
+        style={{width: 200}}
+        date={checkIn.date}
+        mode="date"
+        placeholder="select date"
+        format="YYYY-MM-DD"
+        minDate="Date"
+        maxDate="2024-06-01"
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
+        customStyles={{
+          dateIcon: {
+            position: 'absolute',
+            left: 0,
+            top: 4,
+            marginLeft: 0
+          },
+          dateInput: {
+            marginLeft: 36
+          }
+        }}
+        onDateChange={() => {setCheckout({date: date})}}
+      />
+
  <Text style={styles.loginTexts}>Guest Name:</Text>
  <TextInput style={styles.input} onChangeText={setName} value={name} />
  <Text style={styles.loginTexts}>Guest Surname: </Text>
