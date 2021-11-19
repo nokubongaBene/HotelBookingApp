@@ -25,7 +25,7 @@ LocaleConfig.defaultLocale = 'fr';
 
 
 
-export default function Booking({navigation}){
+export default function Booking({navigation, route}){
   
   const [modalVisible, setModalVisible] = useState(false);    
   const [open, setOpen] = useState(false);
@@ -70,7 +70,18 @@ const handleDatabase=()=>{
               setModalVisible(true);
           })
 
-         // navigation.navigate('Payment')
+         navigation.navigate('PreviewBooking', {
+          checkIn: checkIn,
+          checkOut: checkOut,
+          name:name,
+          surname:surname,
+          email:email,
+          cellphone:cellphone,
+          address:address,
+          Kids: kids,
+          Adults:adults,
+          rooms:value,
+         })
         
 }
 
