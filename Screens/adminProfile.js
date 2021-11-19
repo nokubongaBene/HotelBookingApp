@@ -5,6 +5,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import profile from "../images/orangeProfile.jpeg";
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 let width= Dimensions.get('window').width
 let height= Dimensions.get('window').height
 
@@ -15,14 +17,17 @@ export default function adminProfile({navigation}){
   const [role, setRole] = useState();
   const [hotel, setHotel] = useState();
   const [displayUser, setDisplayUser] = useState([]);
+  const [addimage, setaddimage] = useState();
 
-  const handleDatabase=()=>{     
-    database().ref('Users/' ).push({
-        uid: auth().currentUser.uid,
-      adminName: 'Asanda',
-      adminSurname: 'Nkambule',
+  const handleDatabase=()=>{  
+     
+    database().ref('Profile/' + auth().currentUser.uid ).push({
+       // uid: auth().currentUser.uid,
+      adminName: 'Test',
+      adminSurname: 'Tester',
       UserRole: 'Admin',
-      hotel:'Serenity Hotel'
+      hotel:'Serenity Hotel',
+      image:addimage,
             }).then(() => {
                 console.log('Rooms Added!');
                 navigation.navigate('Profile');
@@ -42,8 +47,37 @@ export default function adminProfile({navigation}){
     auth().signOut().then(()=>console.log('Signed Out'));
     
   }
+  const chooseImage = () =>{
+    var options ={
+        title:'Select Image',
+        includeBase64: true,
+        storageOptions:{
+            skipBackup: true,
+            path: 'images',
+        },
+    }
+   // ImagePicker.launchCamera
+   launchImageLibrary(options, response => {
+        console.log('Response = ', response);
+
+        if (response.didCancel) {
+            console.log('User cancelled image picker');
+        }else if(response.error){
+            //console.log('Image picker Error: ', response.error);
+        }else if(response.customButton){
+            console.log('user tapped custom button: ', response.customButton);
+        }else{
+            let source = 'data:image/jpeg;base64, ' + response.assets[0].base64 ;
+          
+            setaddimage(source);
+            console.log(source)
+        }
+    });
+    Alert.alert('hello world');
+}
+
   const getUser=()=>{
-    database().ref('Users/').on('value', snapshot => {
+    database().ref('Profile/').on('value', snapshot => {
       if(snapshot.val() !== null || snapshot.val() !== undefined){
           let users = snapshot.val();
           let keys = Object.keys(users);
@@ -72,6 +106,9 @@ export default function adminProfile({navigation}){
         <ScrollView>
         <View key={item.key}>
           <ScrollView>
+          <TouchableOpacity onPress={()=> chooseImage()}>
+        <Image style={{height: height * 0.40, width: width * 0.60, borderRadius:15, marginLeft: width*0.10}} source={{uri:addimage}}/>
+        </TouchableOpacity>
            <Text style={styles.header}>Previous Booking</Text>
                     <Text style={styles.bookingDetails}>{item.email}</Text>
                     <Text style={styles.bookingDetails}>{item.adminName} {item.adminSurname}</Text>
@@ -96,9 +133,7 @@ export default function adminProfile({navigation}){
         <Text style={styles.closeText}>X</Text>
         
         </TouchableOpacity>
-        <Text style={styles.loginText}>Profile
-          <Icon name="edit" size={30} color='white' /> Profile
-          </Text>
+        
         <ScrollView>
         {getDisplay()}
         </ScrollView>

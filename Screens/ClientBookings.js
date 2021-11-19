@@ -5,10 +5,11 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import profile from "../images/orangeProfile.jpeg";
 let width= Dimensions.get('window').width
 let height= Dimensions.get('window').height
 
-export default function PreviewBooking({navigation}){
+export default function ClientBookings({navigation}){
 
   
   const [displayBooking, setDisplayBooking] = useState([]);
@@ -78,9 +79,9 @@ export default function PreviewBooking({navigation}){
         <Text style={styles.closeText}>X</Text>
         
         </TouchableOpacity>
-        <Text style={styles.loginText}>Profile
-          <Icon name="edit" size={30} color='white' /> Profile
-          </Text>
+        <TouchableOpacity onPress={()=> navigation.navigate('Profile')}>
+        <Image style={{height: height * 0.04, width: width * 0.08, borderRadius:15, marginLeft: width*0.10}} source={profile}/>
+        </TouchableOpacity>
         <ScrollView>
         {getDisplayBooking()}
         </ScrollView>

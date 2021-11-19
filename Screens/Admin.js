@@ -7,6 +7,7 @@ import data from '../Json/HotelInfo.json';
 import auth from '@react-native-firebase/auth';
 import wifi from "../images/captureall.jpeg";
 import database from '@react-native-firebase/database';
+import profile from "../images/orangeProfile.jpeg";
 let width= Dimensions.get('window').width
 let height= Dimensions.get('window').height
 
@@ -99,7 +100,8 @@ export default function Admin({navigation, }){
      
         <View key={item.key} >
           <View style={styles.previewCards}>
-        <TouchableOpacity  onPress={()=> navigation.navigate('adminProfile')} >
+          
+        <TouchableOpacity   >
           <Text style={styles.header}>{item.RoomType}</Text>          
           <Text style={styles.description}>{item.RoomNumber}</Text>
           <Text style={styles.description}>{item.Amenities}</Text>
@@ -127,9 +129,13 @@ export default function Admin({navigation, }){
   return(
     <ScrollView>
     <View style={styles.preview}>
+   
     <TouchableOpacity style={styles.close} onPress={()=>SignOut()}>
     <Text style={styles.closeText}>X</Text>
     </TouchableOpacity>
+    <TouchableOpacity onPress={()=> navigation.navigate('adminProfile')}>
+        <Image style={{height: height * 0.04, width: width * 0.08, borderRadius:15, marginLeft: width*0.10}} source={profile}/>
+        </TouchableOpacity>
       <View style={styles.preview}>
           
           <Text></Text>

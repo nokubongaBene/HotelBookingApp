@@ -5,13 +5,14 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import profile from "../images/profile.jpeg";
+import profile from "../images/orangeProfile.jpeg";
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 let width= Dimensions.get('window').width
 let height= Dimensions.get('window').height
 
 export default function Profile({navigation}){
 
-  
+  const [addimage, setaddimage] = useState();
   const [displayBooking, setDisplayBooking] = useState([]);
 
   const SignOut = () =>{
@@ -51,6 +52,35 @@ export default function Profile({navigation}){
       }
     })
   }
+  const chooseImage = () =>{
+    var options ={
+        title:'Select Image',
+        includeBase64: true,
+        storageOptions:{
+            skipBackup: true,
+            path: 'images',
+        },
+    }
+   // ImagePicker.launchCamera
+   launchImageLibrary(options, response => {
+        console.log('Response = ', response);
+
+        if (response.didCancel) {
+            console.log('User cancelled image picker');
+        }else if(response.error){
+            //console.log('Image picker Error: ', response.error);
+        }else if(response.customButton){
+            console.log('user tapped custom button: ', response.customButton);
+        }else{
+            let source = 'data:image/jpeg;base64, ' + response.assets[0].base64 ;
+            console.log(source)
+            setaddimage(source);
+        }
+    });
+    Alert.alert('hello world');
+}
+
+
 
   const getDisplayBooking =() =>{
     return displayBooking.map((item, index) =>{
@@ -83,8 +113,9 @@ export default function Profile({navigation}){
         <Text style={styles.closeText}>X</Text>
         
         </TouchableOpacity>
-        <Image style={{height: height * 0.04, width: width * 0.05, borderRadius:15, marginLeft: width*0.30}} source={profile}/>
-
+        <TouchableOpacity onPress={()=> chooseImage()}>
+        <Image style={{height: height * 0.4, width: width * 0.6, borderRadius:15, marginLeft: width*0.20}} source={{uri:addimage}}/>
+        </TouchableOpacity>
         <ScrollView>
         {getDisplayBooking()}
         </ScrollView>

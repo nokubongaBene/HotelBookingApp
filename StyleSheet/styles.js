@@ -273,7 +273,7 @@ export default styles = StyleSheet.create({
       },
       addText:{
           color:'white',
-          fontSize:45,
+          fontSize:40,
           backgroundColor: 'blue',
           width: width * 0.1,
           height: height * 0.1,
@@ -283,6 +283,7 @@ export default styles = StyleSheet.create({
           borderRadius: 40,
       },
       buttonBlue:{
+          position:'absolute',
           width: width * 0.5,
           justifyContent: 'center',
           alignContent: 'center',
