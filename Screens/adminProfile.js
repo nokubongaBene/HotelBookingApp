@@ -21,7 +21,7 @@ export default function adminProfile({navigation}){
 
   const handleDatabase=()=>{  
      
-    database().ref('Profile/' + auth().currentUser.uid ).push({
+    database().ref('Profile/' + auth().currentUser.uid ).set({
        // uid: auth().currentUser.uid,
       adminName: 'Test',
       adminSurname: 'Tester',

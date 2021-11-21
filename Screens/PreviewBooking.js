@@ -18,82 +18,33 @@ export default function PreviewBooking({navigation, route}){
     const [open, setOpen] = useState(false);
     const [bookingDetails, setBookingDetails] = useState();
 
-    const handleDatabase=()=>{     
-        database().ref('Booking/'  ).push({
-          uid:auth().currentUser.uid,
-          checkIn: checkIn,
-          checkOut: checkOut,
-          name:name,
-          surname:surname,
-          email:email,
-          cellphone:cellphone,
-          address:address,
-          Kids: kids,
-          Adults:adults,
-          rooms:value,
-                }).then(() => {
-                    console.log('Booking Added!');
-                    setModalVisible(true);
-                })
-      
-               navigation.navigate('PreviewBooking', {
-                checkIn: checkIn,
-                checkOut: checkOut,
-                name:name,
-                surname:surname,
-                email:email,
-                cellphone:cellphone,
-                address:address,
-                Kids: kids,
-                Adults:adults,
-                rooms:value,
-               })
-              
-      }
-      
+    const showModal=()=>{
+      setModalVisible(true);
+    }
     const hideModal= () =>{
         setModalVisible(false);
     }
-    const retrieveBooking = () =>{
-        database().ref('Booking/').on('value', snapshot => {
-          if(snapshot.val() !== null || snapshot.val() !== undefined){
-            //setRoomDetails(snapshot.val());
-          console.log(snapshot.val());
-          let booking = snapshot.val();
-          let keys = Object.keys(booking);
-          let temp = new Array()
-          
-          console.log(keys);
-
-          for(let i = 0; i<keys.length; i++){
-              let tempBooking = booking[keys[i]]
-              tempBooking.key = keys[i]
-            
-            temp.push(tempBooking);
-          }
-          setBookingDetails(temp);
-          console.log(temp)
-          }
-          
-        })
-      }
-      useEffect(() => {
-        retrieveBooking();
-       //handleDatabase();
-      },[])
-      return bookingDetails.map((item, index) =>{
+    
         return(
             
-               <View key={item.key} >
+               <View  >
                 
-                 <View>
+                 <View style={styles.bookingCard}>
                <TouchableOpacity   >
-                 <Text style={styles.header}>{item.RoomType}</Text>          
-                 <Text style={styles.description}>{item.RoomNumber}</Text>
-                 <Text style={styles.description}>{item.Amenities}</Text>
+               <Text style={styles.description}>Your Booking</Text>
+                 <Text style={styles.header}>{checkIn}</Text>          
+                 <Text style={styles.loginTexts}>{checkOut}</Text>
+                 <Text style={styles.loginTexts}>{name}</Text>
+                 <Text style={styles.loginTexts}>{surname}</Text>
+                 <Text style={styles.loginTexts}>{email}</Text>
+                 <Text style={styles.loginTexts}>{cellphone}</Text>
+                 <Text style={styles.loginTexts}>{address}</Text>
+                 <Text style={styles.loginTexts}>{kids}</Text>
+                 <Text style={styles.loginTexts}>{adults}</Text>
+                 <Text style={styles.loginTexts}>{value}</Text>
+                 
        
-                 {retrieveBooking()}
-                 <TouchableOpacity style={styles.textLogin} kids={kids} adults={adults} rooms={value} onPress={() => handleDatabase()}>
+                 <TouchableOpacity style={styles.textLogin} kids={kids} adults={adults} rooms={value} onPress={() => showModal()}>
                  <Text style={styles.next}>     Next -></Text>
                  <PaymentModal  showModal={modalVisible} hideModalGF={hideModal} navigation={navigation}/>
                  </TouchableOpacity>
@@ -103,4 +54,4 @@ export default function PreviewBooking({navigation, route}){
      
         
     )
-})}
+  }

@@ -297,6 +297,14 @@ export default styles = StyleSheet.create({
         fontSize: 20,
         marginLeft: width * 0.35,
         marginTop: height * 0.02,
+      },
+      dates:{
+          color: 'white',
+          fontSize:20,
+          marginTop: height * 0.1,
+          justifyContent: 'center',
+          alignContent: 'center',
+          marginLeft: width * 0.2
       }
     
 })

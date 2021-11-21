@@ -6,6 +6,7 @@ import wifi from "../images/captureall.jpeg";
 import styles from '../StyleSheet/styles';
 import data from '../Json/HotelInfo.json';
 import {icon} from 'react-native-elements';
+import DatePicker from 'react-native-date-picker';
 
 
 let width= Dimensions.get('window').width
@@ -14,17 +15,23 @@ let height= Dimensions.get('window').height
 //const image = {uri: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzd8fGhvdGVsfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60"};
 
 export default function HotelDescriptionModal({hotelDetails,showModal, hideModalGF, navigation}){
+ //const {hotelDetails} = route.params;
+  const [checkIn, setCheckIn] = useState();
+  const [checkOut, setCheckout] = useState();
 
+  
+  
     
     return(
       <SafeAreaView>
     <Modal visible={showModal} animationType="slide">
     <View style={styles.preview}>
+      <ScrollView>
         <TouchableOpacity style={styles.close} onPress={()=>{hideModalGF()}}>
             <Text style={styles.closeText}>X</Text>
             </TouchableOpacity>
             
-            {data.roomDetails.map((item, index) =>{
+          {data && data.roomDetails.map((item, index) =>{
       return(
         <View key={index} >
           <View style={styles.roomCard}>
@@ -37,15 +44,16 @@ export default function HotelDescriptionModal({hotelDetails,showModal, hideModal
           <Text style={styles.descriptionRoom}>Amenities:</Text>
        {/* <ion-icon name="wifi-outline"></ion-icon> */}
           <Image style={{height: height * 0.04, width: width * 0.50, borderRadius:15,}} source={wifi}/>
-
-          <TouchableOpacity style={styles.textSign} onPress={()=> {hideModalGF();navigation.navigate('Booking')}} >
-            <Text style={styles.Login}>   Book Now  nhjhjjj</Text>
+         
+          <TouchableOpacity style={styles.textSign} onPress={()=> {hideModalGF()}} >
+            <Text style={styles.Login}>   Book Now  </Text>
           </TouchableOpacity>
           </View>
         </View>
       )
     })}
 
+</ScrollView>
         </View>
 </Modal>
 </SafeAreaView>

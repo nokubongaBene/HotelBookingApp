@@ -3,7 +3,6 @@ import { SafeAreaView, ScrollView,StatusBar,Modal,useLayoutEffect,Alert, Image,D
 import {NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator} from '@react-navigation/native-stack';
 import styles from '../StyleSheet/styles';
-import HotelDescriptionModal from './HotelDescriptionModal';
 import data from '../Json/HotelInfo.json';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
@@ -48,14 +47,11 @@ export default function Preview({navigation }){
     }
     //storing the data of the hotel
     const storeHotelDetails =(item) =>{
-      console.log(item);
-      setHotelDetails(item);
-      setModalVisible(true);
+      console.log('item ', item);
+      setHotelDetails(item)
+      navigation.navigate('Dates',{hotelDetails:item})
     }
 
-    const hideModal= () =>{
-        setModalVisible(false);
-    }
 
     const SignOut = () =>{
       // auth().signOut().then(() => {
@@ -77,7 +73,7 @@ export default function Preview({navigation }){
           <ScrollView>
           <Text> </Text>
     
-    {data.info.map((item, index) =>{
+    {data && data.info.map((item, index) =>{
       {/* database().ref('Hotels/' + 'hotel').set({
         name: item.name,
         Location: item.Location,
@@ -88,8 +84,8 @@ export default function Preview({navigation }){
                  
               }) */}
       return(
-        <ScrollView>
-        <View key={index} >
+        <ScrollView key={index}>
+        <View  >
         
           <View style={styles.previewCards}>
         <TouchableOpacity  onPress={() => storeHotelDetails(item) } >
@@ -107,7 +103,7 @@ export default function Preview({navigation }){
 
 
     
-<HotelDescriptionModal hotelDetails={hotelDetails} showModal={modalVisible} hideModalGF={hideModal} navigation={navigation}/>
+
 </ScrollView>
     </View>
    

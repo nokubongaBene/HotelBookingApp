@@ -9,7 +9,7 @@ import { Calendar, CalendarList, Agenda, LocaleConfig} from 'react-native-calend
 import PaymentModal from './PaymentModal';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
-import DatePicker from 'react-native-datepicker';
+import DatePicker from 'react-native-date-picker';
 
 
 const Stack = createNativeStackNavigator();
@@ -26,15 +26,14 @@ LocaleConfig.defaultLocale = 'fr';
 
 
 
-export default function Booking({navigation, route}){
-  
+export default function Booking({route ,navigation }){
+  const {checkIn, checkOut} = route.params;
+
   const [modalVisible, setModalVisible] = useState(false);    
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState();
   const [kids, setKids] = useState();
   const [adults, setAdults] = useState();
-  const [checkIn, setCheckIn] = useState([]);
-  const [checkOut, setCheckout] = useState([]);
   const [name, setName] = useState();
   const [surname, setSurname] = useState();
   const [email,setEmail] = useState();
@@ -87,7 +86,7 @@ const handleDatabase=()=>{
 }
 
 
-  
+
   return(
    
     <View style={styles.bookingCard} >
@@ -96,56 +95,7 @@ const handleDatabase=()=>{
  <Text style={styles.heading}>Room Booking</Text>
 <View>
 
- <Text style={styles.loginTexts}>Check In Date: {checkIn}</Text>
- <DatePicker
-        style={{width: 200}}
-        date={checkIn.date}
-        mode="date"
-        placeholder="select date"
-        format="YYYY-MM-DD"
-        minDate="2016-05-01"
-        maxDate="2016-06-01"
-        confirmBtnText="Confirm"
-        cancelBtnText="Cancel"
-        customStyles={{
-          dateIcon: {
-            position: 'absolute',
-            left: 0,
-            top: 4,
-            marginLeft: 0
-          },
-          dateInput: {
-            marginLeft: 36
-          }
-          // ... You can check the source to find the other keys.
-        }}
-        onDateChange={() => {setCheckIn({date: date})}}
-      />
 
- <Text style={styles.loginTexts}>Check Out Date: {checkOut}</Text>
- <DatePicker
-        style={{width: 200}}
-        date={checkIn.date}
-        mode="date"
-        placeholder="select date"
-        format="YYYY-MM-DD"
-        minDate="Date"
-        maxDate="2024-06-01"
-        confirmBtnText="Confirm"
-        cancelBtnText="Cancel"
-        customStyles={{
-          dateIcon: {
-            position: 'absolute',
-            left: 0,
-            top: 4,
-            marginLeft: 0
-          },
-          dateInput: {
-            marginLeft: 36
-          }
-        }}
-        onDateChange={() => {setCheckout({date: date})}}
-      />
 
  <Text style={styles.loginTexts}>Guest Name:</Text>
  <TextInput style={styles.input} onChangeText={setName} value={name} />

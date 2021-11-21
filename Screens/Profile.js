@@ -75,9 +75,28 @@ export default function Profile({navigation}){
             let source = 'data:image/jpeg;base64, ' + response.assets[0].base64 ;
             console.log(source)
             setaddimage(source);
+            handleProfile();
         }
     });
     Alert.alert('hello world');
+}
+const handleProfile=()=>{  
+  
+ database().ref('Profile/' + auth().currentUser.uid ).set({
+    // uid: auth().currentUser.uid,
+   adminName: 'Test',
+   adminSurname: 'Tester',
+   UserRole: 'Admin',
+   hotel:'Serenity Hotel',
+   addimage:addimage,
+         }).then(() => {
+             console.log('Rooms Added!');
+             navigation.navigate('Profile');
+            
+         })
+
+         //console.log(RoomNumber);
+         
 }
 
 
