@@ -14,6 +14,7 @@ export default function Profile({navigation}){
 
   const [addimage, setaddimage] = useState();
   const [displayBooking, setDisplayBooking] = useState([]);
+  const [profileImage, setProfileimage] = useState();
 
   const SignOut = () =>{
     // auth().signOut().then(() => {
@@ -25,6 +26,19 @@ export default function Profile({navigation}){
     auth().signOut().then(()=>console.log('Signed Out'));
     
   }
+  const getPRofile=()=>{
+    let user = auth().currentUser;
+    database().ref('Profile/' + user.uid).on('value', snapshot => {
+      setProfileimage(snapshot.val());
+      
+    })
+    
+    console.log(user);
+  }
+  useEffect(() => {
+    getPRofile();
+//handleDatabase();
+  },[])
   const getUserBooking=()=>{
     database().ref('Booking/').on('value', snapshot => {
       if(snapshot.val() !== null || snapshot.val() !== undefined){
@@ -75,12 +89,12 @@ export default function Profile({navigation}){
             let source = 'data:image/jpeg;base64, ' + response.assets[0].base64 ;
             console.log(source)
             setaddimage(source);
-            handleProfile();
+            handleProfile(source);
         }
     });
     Alert.alert('hello world');
 }
-const handleProfile=()=>{  
+const handleProfile=(source)=>{  
   
  database().ref('Profile/' + auth().currentUser.uid ).set({
     // uid: auth().currentUser.uid,
@@ -88,10 +102,10 @@ const handleProfile=()=>{
    adminSurname: 'Tester',
    UserRole: 'Admin',
    hotel:'Serenity Hotel',
-   addimage:addimage,
+   addimage:source,
          }).then(() => {
              console.log('Rooms Added!');
-             navigation.navigate('Profile');
+            // navigation.navigate('Profile');
             
          })
 
