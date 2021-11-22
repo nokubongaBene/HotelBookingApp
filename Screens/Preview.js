@@ -28,6 +28,7 @@ export default function Preview({navigation }){
     const [modalVisible, setModalVisible] = useState(false);
     //To display hotel info on the modal Description
     const [hotelDetails, setHotelDetails] = useState({});
+    const [roomDetails, setRoomDetails] = useState([]);
 
     const handleDatabase=()=>{
 
@@ -45,6 +46,8 @@ export default function Preview({navigation }){
       }
      
     }
+   
+    
     //storing the data of the hotel
     const storeHotelDetails =(item) =>{
       console.log('item ', item);
@@ -63,6 +66,25 @@ export default function Preview({navigation }){
       auth().signOut().then(()=>console.log('Signed Out'));
       
     }
+    const displayRoomDetails =() =>{
+      return roomDetails.map((item, index) =>{
+         return(
+        
+           <View key={item.key} >
+             <View style={styles.previewCards}>
+             
+           <TouchableOpacity   >
+             <Text style={styles.header}>{item.RoomType}</Text>          
+             <Text style={styles.description}>{item.RoomNumber}</Text>
+             <Text style={styles.description}>{item.Amenities}</Text>
+             <Image style={{height: height * 0.04, width: width * 0.50, borderRadius:15, marginLeft: width*0.30}} source={wifi}/>
+             <Image style={{height: height * 0.25, width: width * 0.32, borderRadius:15, position: 'absolute', marginTop: 20,}} source={{uri:item.image}}/> 
+             </TouchableOpacity>
+             </View>
+           </View>
+         )
+       })}
+     
     // console.log(data.info[0].name);
   return(
   

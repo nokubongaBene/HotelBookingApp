@@ -59,7 +59,7 @@ export default function App({navigation}){
       <Stack.Navigator screenOptions={{ headerShown: false}}>
       <Stack.Screen name="Admin" component={Admin} />
       <Stack.Screen name="AddHotel" component={AddHotel} />
-      <Stack.Screen name="Profile" component={Profile} />
+      {/* <Stack.Screen name="Profile" component={Profile} /> */}
       <Stack.Screen name="adminProfile" component={adminProfile} />
       </Stack.Navigator>
       :

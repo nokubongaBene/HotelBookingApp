@@ -110,7 +110,7 @@ export default function adminProfile({navigation}){
         <Image style={{height: height * 0.40, width: width * 0.60, borderRadius:15, marginLeft: width*0.10}} source={{uri:addimage}}/>
         </TouchableOpacity>
            <Text style={styles.header}>Previous Booking</Text>
-                    <Text style={styles.bookingDetails}>{item.email}</Text>
+                    <Text style={styles.loginTexts}>{item.email}</Text>
                     <Text style={styles.bookingDetails}>{item.adminName} {item.adminSurname}</Text>
                     <Text style={styles.bookingDetails}></Text>
                     <Text style={styles.bookingDetails}>{item.role}</Text>
@@ -123,7 +123,7 @@ export default function adminProfile({navigation}){
 
     useEffect(() => {
       getUser();
- //handleDatabase();
+// handleDatabase();
     },[])
 
     
@@ -133,7 +133,7 @@ export default function adminProfile({navigation}){
         <Text style={styles.closeText}>X</Text>
         
         </TouchableOpacity>
-        
+        <Image style={{height: height * 0.40, width: width * 0.60, borderRadius:15, marginLeft: width*0.10}} source={{uri:addimage}}/>
         <ScrollView>
         {getDisplay()}
         </ScrollView>

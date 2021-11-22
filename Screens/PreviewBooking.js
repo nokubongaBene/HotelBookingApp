@@ -31,9 +31,8 @@ export default function PreviewBooking({navigation, route}){
                 
                  <View style={styles.bookingCard}>
                <TouchableOpacity   >
-               <Text style={styles.description}>Your Booking</Text>
-                 <Text style={styles.header}>{checkIn}</Text>          
-                 <Text style={styles.loginTexts}>{checkOut}</Text>
+               <Text style={styles.headerProfile}>Your Booking Details</Text>
+                 <Text style={styles.loginTexts}>Check In: {checkIn}- Check Out:{checkOut}</Text>          
                  <Text style={styles.loginTexts}>{name}</Text>
                  <Text style={styles.loginTexts}>{surname}</Text>
                  <Text style={styles.loginTexts}>{email}</Text>

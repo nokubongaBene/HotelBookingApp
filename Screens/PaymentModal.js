@@ -1,5 +1,5 @@
 import React, {useState,useRef,useEffect, memo} from 'react';
-import { SafeAreaView, ScrollView,StatusBar,Dimensions,Button, Modal,Image,TextInput, TouchableOpacity,StyleSheet,Text,useColorScheme,View} from 'react-native';
+import { SafeAreaView, ScrollView,StatusBar,Dimensions,Button,Alert, Modal,Image,TextInput, TouchableOpacity,StyleSheet,Text,useColorScheme,View} from 'react-native';
 import {NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator} from '@react-navigation/native-stack';
 import styles from '../StyleSheet/styles';

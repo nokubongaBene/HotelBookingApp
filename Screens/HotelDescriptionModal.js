@@ -18,9 +18,50 @@ export default function HotelDescriptionModal({hotelDetails,showModal, hideModal
  //const {hotelDetails} = route.params;
   const [checkIn, setCheckIn] = useState();
   const [checkOut, setCheckout] = useState();
+  const [roomDetails, setRoomDetails] = useState([]);
 
+  const retrieveRooms = () =>{
+    database().ref('Rooms/').on('value', snapshot => {
+      if(snapshot.val() !== null || snapshot.val() !== undefined){
+        //setRoomDetails(snapshot.val());
+      console.log(snapshot.val());
+      let rooms = snapshot.val();
+      let keys = Object.keys(rooms);
+      let temp = new Array()
+      
+      console.log(keys);
+
+      for(let i = 0; i<keys.length; i++){
+          let tempRoom = rooms[keys[i]]
+          tempRoom.key = keys[i]
+        
+        temp.push(tempRoom);
+      }
+      setRoomDetails(temp);
+      console.log(temp)
+      }
+      
+    })
+  }
   
-  
+  const displayRoomDetails =() =>{
+    return roomDetails.map((item, index) =>{
+       return(
+      
+         <View key={item.key} >
+           <View style={styles.previewCards}>
+           
+         <TouchableOpacity   >
+           <Text style={styles.header}>{item.RoomType}</Text>          
+           <Text style={styles.description}>{item.RoomNumber}</Text>
+           <Text style={styles.description}>{item.Amenities}</Text>
+           <Image style={{height: height * 0.04, width: width * 0.50, borderRadius:15, marginLeft: width*0.30}} source={wifi}/>
+           <Image style={{height: height * 0.25, width: width * 0.32, borderRadius:15, position: 'absolute', marginTop: 20,}} source={{uri:item.image}}/> 
+           </TouchableOpacity>
+           </View>
+         </View>
+       )
+     })}
     
     return(
       <SafeAreaView>
@@ -44,7 +85,7 @@ export default function HotelDescriptionModal({hotelDetails,showModal, hideModal
           <Text style={styles.descriptionRoom}>Amenities:</Text>
        {/* <ion-icon name="wifi-outline"></ion-icon> */}
           <Image style={{height: height * 0.04, width: width * 0.50, borderRadius:15,}} source={wifi}/>
-         
+         {displayRoomDetails()}
           <TouchableOpacity style={styles.textSign} onPress={()=> {hideModalGF()}} >
             <Text style={styles.Login}>   Book Now  </Text>
           </TouchableOpacity>

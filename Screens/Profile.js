@@ -114,7 +114,6 @@ const handleProfile=(source)=>{
 }
 
 
-
   const getDisplayBooking =() =>{
     return displayBooking.map((item, index) =>{
       return(
@@ -137,6 +136,7 @@ const handleProfile=(source)=>{
 
     useEffect(() => {
       getUserBooking();
+      handleProfile();
     },[])
 
     

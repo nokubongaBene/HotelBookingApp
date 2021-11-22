@@ -43,6 +43,7 @@ export default function AddHotel({route, navigation}){
                   Amenities: addamenities,
                   image: addimage
                 })
+                navigation.navigate('Admin');
               }
     const chooseImage = () =>{
         var options ={
