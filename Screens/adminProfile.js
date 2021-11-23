@@ -10,33 +10,12 @@ import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 let width= Dimensions.get('window').width
 let height= Dimensions.get('window').height
 
-export default function adminProfile({navigation}){
+export default function Profile({navigation}){
 
-  const [adminName, setAdminName] = useState();
-  const [adminSurname, setAdminSurname] = useState();
-  const [role, setRole] = useState();
-  const [hotel, setHotel] = useState();
-  const [displayUser, setDisplayUser] = useState([]);
   const [addimage, setaddimage] = useState();
+  const [displayBooking, setDisplayBooking] = useState([]);
+  const [profileImage, setProfileimage] = useState();
 
-  const handleDatabase=()=>{  
-     
-    database().ref('Profile/' + auth().currentUser.uid ).set({
-       // uid: auth().currentUser.uid,
-      adminName: 'Admin',
-      adminSurname: 'Tester',
-      UserRole: 'Admin',
-      hotel:'Serenity Hotel',
-      image:addimage,
-            }).then(() => {
-                console.log('Rooms Added!');
-               // navigation.navigate('Profile');
-               
-            })
-
-            //console.log(RoomNumber);
-            
-  }
   const SignOut = () =>{
     // auth().signOut().then(() => {
     //   navigation.navigation('SignIn');
@@ -46,6 +25,46 @@ export default function adminProfile({navigation}){
 
     auth().signOut().then(()=>console.log('Signed Out'));
     
+  }
+  const getPRofile=()=>{
+    let user = auth().currentUser;
+    database().ref('Profile/' + user.uid).on('value', snapshot => {
+      setProfileimage(snapshot.val().addimage);
+      console.log('image is',snapshot.val().addimage);
+    })
+    
+    console.log(user);
+  }
+  useEffect(() => {
+    getPRofile();
+//handleDatabase();
+  },[])
+  const getUserBooking=()=>{
+    database().ref('Profile/').on('value', snapshot => {
+      if(snapshot.val() !== null || snapshot.val() !== undefined){
+          let bookings = snapshot.val();
+          let keys = Object.keys(bookings);
+          let temp = new Array();
+
+         
+        for(let i = 0; i<keys.length; i++){
+          let tempBooking = bookings[keys[i]];
+          tempBooking.key = keys[i];
+          console.log(tempBooking);
+
+          if(tempBooking.uid === auth().currentUser.uid){
+            temp.push(tempBooking)
+          }else if(tempBooking.UserRole === 'Admin') {
+            temp.push(tempBooking);
+            //Alert.alert('No bookings for this user.');
+           
+          }
+          //navigation.navigate('Admin');
+        }
+        console.log("temp is ",temp);
+        setDisplayBooking(temp);
+      }
+    })
   }
   const chooseImage = () =>{
     var options ={
@@ -68,52 +87,42 @@ export default function adminProfile({navigation}){
             console.log('user tapped custom button: ', response.customButton);
         }else{
             let source = 'data:image/jpeg;base64, ' + response.assets[0].base64 ;
-          
-            setaddimage(source);
             console.log(source)
+            setaddimage(source);
+            handleProfile(source);
+            setProfileimage(source);
         }
     });
     Alert.alert('hello world');
 }
+const handleProfile=(source)=>{  
+  
+ database().ref('Profile/' + auth().currentUser.uid).set({
+    // uid: auth().currentUser.uid,
+   Name: 'Asanda',
+   Surname: 'Nkambule',
+   UserRole: 'Admin',
+   addimage:source,
+         }).then(() => {
+             console.log('Profile Added!');
+            // navigation.navigate('Profile');
+            
+         })
 
-  const getUser=()=>{
-    database().ref('Profile/').on('value', snapshot => {
-      if(snapshot.val() !== null || snapshot.val() !== undefined){
-          let users = snapshot.val();
-          let keys = Object.keys(users);
-          let temp = new Array();
-
+         //console.log(RoomNumber);
          
-        for(let i = 0; i<keys.length; i++){
-          let tempUser = users[keys[i]];
-          tempUser.key = keys[i];
-          console.log(tempUser);
+}
 
-          if(tempUser.uid === auth().currentUser.uid ){
-            temp.push(tempUser)
-          }
-          //navigation.navigate('Admin');
-        }
-        console.log("temp is ",temp);
-        setDisplayUser(temp);
-      }
-    })
-  }
 
-  const getDisplay =() =>{
-    return displayUser.map((item, index) =>{
+  const getDisplayBooking =() =>{
+    return displayBooking.map((item, index) =>{
       return(
         <ScrollView>
         <View key={item.key}>
           <ScrollView>
-          <TouchableOpacity onPress={()=> chooseImage()}>
-        <Image style={{height: height * 0.40, width: width * 0.60, borderRadius:15, marginLeft: width*0.10}} source={{uri:addimage}}/>
-        </TouchableOpacity>
-           <Text style={styles.header}>Previous Booking</Text>
-                    <Text style={styles.loginTexts}>{item.email}</Text>
-                    <Text style={styles.bookingDetails}>{item.adminName} {item.adminSurname}</Text>
-                    <Text style={styles.bookingDetails}></Text>
-                    <Text style={styles.bookingDetails}>{item.role}</Text>
+           <Text style={styles.headerProfile}>Hi, {item.Name}</Text>
+                    <Text style={styles.bookingDetails}>{item.Name} {item.Surname}</Text>
+                    <Text style={styles.bookingDetails}>{item.UserRole}</Text>
                     
                     </ScrollView>
           </View>
@@ -122,8 +131,8 @@ export default function adminProfile({navigation}){
     })}
 
     useEffect(() => {
-      getUser();
-handleDatabase();
+      getUserBooking();
+     //handleProfile();
     },[])
 
     
@@ -133,9 +142,11 @@ handleDatabase();
         <Text style={styles.closeText}>X</Text>
         
         </TouchableOpacity>
-        <Image style={{height: height * 0.40, width: width * 0.60, borderRadius:15, marginLeft: width*0.10}} source={{uri:addimage}}/>
+        <TouchableOpacity onPress={()=> chooseImage()}>
+        <Image style={{height: height * 0.4, width: width * 0.6, borderRadius:15, marginLeft: width*0.20}} source={{uri:profileImage}}/>
+        </TouchableOpacity>
         <ScrollView>
-        {getDisplay()}
+        {getDisplayBooking()}
         </ScrollView>
       </View>
     )
