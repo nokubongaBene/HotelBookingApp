@@ -6,15 +6,18 @@ import auth from '@react-native-firebase/auth';
 import data from '../Json/HotelInfo.json';
 import database from '@react-native-firebase/database';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import DropDownPicker from 'react-native-dropdown-picker';
+import {Picker} from '@react-native-picker/picker';
 
 let width= Dimensions.get('window').width
 let height= Dimensions.get('window').height
 
 export default function AddHotel({route, navigation}){
-    const {title,buttonText, key,RoomType, RoomNumber, Amenities, image } = route.params;
+    const {title,buttonText, key,RoomType, RoomNumber, Description,Amenities, image } = route.params;
 
     const [addroomType, setAddRoomType] = useState(RoomType);
     const [addroomNumber, setAddRoomNumber] = useState(RoomNumber);
+    const [addroomDescription, setAddRoomDescription] = useState(Description);
     const [addamenities, setAddAmenities] = useState(Amenities);
     const [addimage, setaddimage] = useState(image);
 
@@ -23,6 +26,7 @@ export default function AddHotel({route, navigation}){
                 database().ref('Rooms/' ).push({
                   RoomType: addroomType,
                   RoomNumber: addroomNumber,
+                  Description:addroomDescription,
                   image: addimage,
                   Amenities:addamenities,
                   image:addimage
@@ -40,6 +44,7 @@ export default function AddHotel({route, navigation}){
                 database().ref('Rooms/' + key).update({
                   RoomType:addroomType,
                   RoomNumber: addroomNumber,
+                  Description: addroomDescription,
                   Amenities: addamenities,
                   image: addimage
                 })
@@ -78,6 +83,7 @@ export default function AddHotel({route, navigation}){
     return(
         <ScrollView>
         <View  style={styles.preview}>
+            <ScrollView>
              <Text style={styles.welcomeText}>{title} </Text>
             <Text style={styles.loginTexts}>Room Name:</Text>
             <TextInput  multiline style={styles.input}
@@ -90,10 +96,24 @@ export default function AddHotel({route, navigation}){
             value={addroomNumber}
             onChangeText={(val) => setAddRoomNumber(val)}/>
 
+            <Text style={styles.loginTexts}>Room Description:</Text>
+            <TextInput style={styles.input}
+            value={addroomDescription}
+            onChangeText={(val) => setAddRoomDescription(val)}/>
+
             <Text style={styles.loginTexts}>Room Amenities:</Text>
-            <TextInput  multiline style={styles.input}
-            value={addamenities}
-            onChangeText={(val) => setAddAmenities(val)}/>
+           <Picker
+                selectedValue ={addamenities}
+                style={{color: 'white'}}
+                onValueChange={(itemValue, itemIndex)=>
+                setAddAmenities(itemValue)}>
+                <Picker.Item label="+Wifi +Pool +Jacuzzi +Breakfast +Aircon" value="+Wifi +Pool +Jacuzzi +Breakfast +Aircon"/>
+                <Picker.Item label="+Wifi +Pool +Jacuzzi +Breakfast " value="+Wifi +Pool +Jacuzzi +Breakfast"/>
+                <Picker.Item label="+Wifi +Pool +Breakfast +Aircon" value="+Wifi +Pool +Breakfast +Aircon"/>
+                <Picker.Item label="+Wifi +Pool +Breakfast" value="+Wifi +Pool +Breakfast"/>
+                <Picker.Item label="+Aircon +Pool +Breakfast " value="+Aircon +Pool  +Breakfast"/>
+                <TextInput style={styles.input} />
+                </Picker>
 
             <View>
                 <TouchableOpacity onPress={() => chooseImage()}>
@@ -106,6 +126,7 @@ export default function AddHotel({route, navigation}){
                          }/>
                    
                     </View>
+                    </ScrollView>
             </View>
             </ScrollView>
     )

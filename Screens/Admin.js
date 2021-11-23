@@ -32,6 +32,7 @@ export default function Admin({navigation, }){
           database().ref('Rooms/' ).push({
             RoomType: item.RoomType,
             RoomNumber: item.RoomNumber,
+            Description: item.Description,
             Amenities: item.Amenities,
             image: item.image
                   }).then(() => {
@@ -104,8 +105,9 @@ export default function Admin({navigation, }){
         <TouchableOpacity   >
           <Text style={styles.header}>{item.RoomType}</Text>          
           <Text style={styles.description}>{item.RoomNumber}</Text>
+          <Text style={styles.description}>{item.Description}</Text>
           <Text style={styles.description}>{item.Amenities}</Text>
-          <Image style={{height: height * 0.04, width: width * 0.50, borderRadius:15, marginLeft: width*0.30}} source={wifi}/>
+          {/* <Image style={{height: height * 0.04, width: width * 0.50, borderRadius:15, marginLeft: width*0.30}} source={wifi}/> */}
           
               
               <Button title='Update' color='black' onPress={()=> navigation.navigate('AddHotel',{
@@ -114,6 +116,7 @@ export default function Admin({navigation, }){
                 key: item.key,
                 RoomType:item.RoomType,
                 RoomNumber: item.RoomNumber,
+                Description: item.Description,
                 Amenities: item.Amenities,
                 image: item.image})}/>
                 <Button title="Delete" style={styles.buttonBlue} onPress={()=> handleDelete(item)} />
@@ -150,6 +153,7 @@ export default function Admin({navigation, }){
           key: "",
           RoomType:"",
           RoomNumber: "",
+          Description:"",
           Amenities: "",
           image:""})}>
    <Text style={styles.addText}>+</Text>
