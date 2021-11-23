@@ -6,6 +6,7 @@ import styles from '../StyleSheet/styles';
 import data from '../Json/HotelInfo.json';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
+import profile from "../images/orangeProfile.jpeg";
 let width= Dimensions.get('window').width
 let height= Dimensions.get('window').height
 
@@ -92,6 +93,9 @@ export default function Preview({navigation }){
         <TouchableOpacity style={styles.close} onPress={()=>SignOut()}>
         <Text style={styles.closeText}>X</Text>
         </TouchableOpacity>
+           <TouchableOpacity onPress={()=> navigation.navigate('Profile')}>
+        <Image style={{height: height * 0.04, width: width * 0.08, borderRadius:15, marginLeft: width*0.10}} source={profile}/>
+        </TouchableOpacity>
           <ScrollView>
           <Text> </Text>
     
@@ -108,7 +112,7 @@ export default function Preview({navigation }){
       return(
         <ScrollView key={index}>
         <View  >
-        
+     
           <View style={styles.previewCards}>
         <TouchableOpacity  onPress={() => storeHotelDetails(item) } >
           <Text style={styles.header}>{item.name}</Text>          

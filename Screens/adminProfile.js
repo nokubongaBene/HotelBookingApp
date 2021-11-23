@@ -23,14 +23,14 @@ export default function adminProfile({navigation}){
      
     database().ref('Profile/' + auth().currentUser.uid ).set({
        // uid: auth().currentUser.uid,
-      adminName: 'Test',
+      adminName: 'Admin',
       adminSurname: 'Tester',
       UserRole: 'Admin',
       hotel:'Serenity Hotel',
       image:addimage,
             }).then(() => {
                 console.log('Rooms Added!');
-                navigation.navigate('Profile');
+               // navigation.navigate('Profile');
                
             })
 
@@ -123,7 +123,7 @@ export default function adminProfile({navigation}){
 
     useEffect(() => {
       getUser();
-// handleDatabase();
+handleDatabase();
     },[])
 
     

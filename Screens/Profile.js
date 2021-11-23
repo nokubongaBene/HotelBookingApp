@@ -29,8 +29,8 @@ export default function Profile({navigation}){
   const getPRofile=()=>{
     let user = auth().currentUser;
     database().ref('Profile/' + user.uid).on('value', snapshot => {
-      setProfileimage(snapshot.val());
-      
+      setProfileimage(snapshot.val().addimage);
+      console.log('image is',snapshot.val().addimage);
     })
     
     console.log(user);
@@ -90,18 +90,18 @@ export default function Profile({navigation}){
             console.log(source)
             setaddimage(source);
             handleProfile(source);
+            setProfileimage(source);
         }
     });
     Alert.alert('hello world');
 }
 const handleProfile=(source)=>{  
   
- database().ref('Profile/' + auth().currentUser.uid ).set({
+ database().ref('Profile/' + auth().currentUser.uid).set({
     // uid: auth().currentUser.uid,
-   adminName: 'Test',
-   adminSurname: 'Tester',
-   UserRole: 'Admin',
-   hotel:'Serenity Hotel',
+   Name: 'Nokubonga',
+   Surname: 'Nkambule',
+   UserRole: 'Client',
    addimage:source,
          }).then(() => {
              console.log('Rooms Added!');
@@ -136,7 +136,7 @@ const handleProfile=(source)=>{
 
     useEffect(() => {
       getUserBooking();
-      handleProfile();
+     //handleProfile();
     },[])
 
     
@@ -147,7 +147,7 @@ const handleProfile=(source)=>{
         
         </TouchableOpacity>
         <TouchableOpacity onPress={()=> chooseImage()}>
-        <Image style={{height: height * 0.4, width: width * 0.6, borderRadius:15, marginLeft: width*0.20}} source={{uri:addimage}}/>
+        <Image style={{height: height * 0.4, width: width * 0.6, borderRadius:15, marginLeft: width*0.20}} source={{uri:profileImage}}/>
         </TouchableOpacity>
         <ScrollView>
         {getDisplayBooking()}
