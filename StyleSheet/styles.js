@@ -163,7 +163,7 @@ export default styles = StyleSheet.create({
 
     },
     buttons:{
-        marginTop: height *0.5,
+        marginTop: height *0.15,
     },
     next:{
         color: 'white',
