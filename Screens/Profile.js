@@ -6,6 +6,7 @@ import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import profile from "../images/orangeProfile.jpeg";
+import book from "../images/images.jpeg";
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 let width= Dimensions.get('window').width
 let height= Dimensions.get('window').height

@@ -6,6 +6,7 @@ import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import profile from "../images/orangeProfile.jpeg";
+import book from "../images/images.jpeg";
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 let width= Dimensions.get('window').width
 let height= Dimensions.get('window').height
@@ -140,7 +141,9 @@ const handleProfile=(source)=>{
       <View style={styles.preview}>
          <TouchableOpacity style={styles.close} onPress={()=>SignOut()}>
         <Text style={styles.closeText}>X</Text>
-        
+        <TouchableOpacity onPress={()=> navigation.navigate('ClientBookings')}>
+        <Image style={{height: height * 0.07, width: width * 0.10, borderRadius:15, marginLeft: width*0.30}} source={book}/>
+          </TouchableOpacity>
         </TouchableOpacity>
         <TouchableOpacity onPress={()=> chooseImage()}>
         <Image style={{height: height * 0.4, width: width * 0.6, borderRadius:15, marginLeft: width*0.20}} source={{uri:profileImage}}/>

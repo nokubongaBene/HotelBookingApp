@@ -37,9 +37,10 @@ export default function ClientBookings({navigation}){
           tempBooking.key = keys[i];
           console.log(tempBooking);
 
-          if(tempBooking.uid === auth().currentUser.uid){
-            temp.push(tempBooking)
-          }
+          // if(tempBooking.uid === auth().currentUser.uid){
+          //   temp.push(tempBooking)
+          // }
+          temp.push(tempBooking);
           //navigation.navigate('Admin');
         }
         console.log("temp is ",temp);
@@ -79,7 +80,7 @@ export default function ClientBookings({navigation}){
         <Text style={styles.closeText}>X</Text>
         
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=> navigation.navigate('Profile')}>
+        <TouchableOpacity onPress={()=> navigation.navigate('adminProfile')}>
         <Image style={{height: height * 0.04, width: width * 0.08, borderRadius:15, marginLeft: width*0.10}} source={profile}/>
         </TouchableOpacity>
         <ScrollView>
