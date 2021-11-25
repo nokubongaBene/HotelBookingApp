@@ -142,7 +142,7 @@ const handleProfile=(source)=>{
          <TouchableOpacity style={styles.close} onPress={()=>SignOut()}>
         <Text style={styles.closeText}>X</Text>
         <TouchableOpacity onPress={()=> navigation.navigate('ClientBookings')}>
-        <Image style={{height: height * 0.07, width: width * 0.10, borderRadius:15, marginLeft: width*0.30}} source={book}/>
+        <Image style={{height: height * 0.07, width: width * 0.10, borderRadius:15, marginLeft: width*0.05}} source={book}/>
           </TouchableOpacity>
         </TouchableOpacity>
         <TouchableOpacity onPress={()=> chooseImage()}>
