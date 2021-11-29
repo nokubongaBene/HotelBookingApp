@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { SafeAreaView, ScrollView,StatusBar,Button, Dimensions, Alert,Modal,Image,FlatList, TextInput, TouchableOpacity,StyleSheet,Text,useColorScheme,View} from 'react-native';
+import { SafeAreaView, ScrollView,StatusBar,Button, Dimensions, Alert,Modal,Image,FlatList, TextInput,ActivityIndicator, TouchableOpacity,StyleSheet,Text,useColorScheme,View} from 'react-native';
 import {NavigationContainer } from '@react-navigation/native-stack';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import auth from '@react-native-firebase/auth';
@@ -9,10 +9,14 @@ import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {Picker} from '@react-native-picker/picker';
 
+
 let width= Dimensions.get('window').width
 let height= Dimensions.get('window').height
 
 export default function AddHotel({route, navigation}){
+
+    const [loader, setLoader] = useState(false); 
+    
     const {title,buttonText, key,RoomType, RoomNumber, Description,Amenities, image } = route.params;
 
     const [addroomType, setAddRoomType] = useState(RoomType);
@@ -22,7 +26,9 @@ export default function AddHotel({route, navigation}){
     const [addimage, setaddimage] = useState(image);
 
 
-    const handleDatabase=()=>{     
+    const handleDatabase=()=>{
+        setLoader(true);
+        
                 database().ref('Rooms/' ).push({
                   RoomType: addroomType,
                   RoomNumber: addroomNumber,
@@ -32,6 +38,7 @@ export default function AddHotel({route, navigation}){
                   image:addimage
                         }).then(() => {
                             console.log('Rooms Added!');
+                            setLoader(false);
                             navigation.navigate('Admin');
                            
                         })
@@ -41,6 +48,7 @@ export default function AddHotel({route, navigation}){
               }
 
               const handleUpdate = () =>{
+                  setLoader(true);
                 database().ref('Rooms/' + key).update({
                   RoomType:addroomType,
                   RoomNumber: addroomNumber,
@@ -48,6 +56,8 @@ export default function AddHotel({route, navigation}){
                   Amenities: addamenities,
                   image: addimage
                 })
+
+                setLoader(false);
                 navigation.navigate('Admin');
               }
     const chooseImage = () =>{
@@ -122,9 +132,10 @@ export default function AddHotel({route, navigation}){
                 </View>
 
                 <View style={styles.buttonContainer}>
+                    {!loader ? (
                     <Button title={buttonText} onPress={()=> {buttonText === "Add" ? handleDatabase() : handleUpdate() }
-                         }/>
-                   
+                         }/>) :(<ActivityIndicator size="large" style={{alignSelf: "center"}}/>)
+                    }
                     </View>
                     </ScrollView>
             </View>

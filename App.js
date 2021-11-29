@@ -67,7 +67,6 @@ export default function App({navigation}){
     <Stack.Screen name="Preview" component={Preview}/>
      <Stack.Screen name="Booking" component={Booking} />
      <Stack.Screen name="PreviewBooking" component={PreviewBooking}/>
-     <Stack.Screen name="ClientBookings" component={ClientBookings} />
      <Stack.Screen name="Profile" component={Profile} />
      <Stack.Screen name="Dates" component={Dates} />
       

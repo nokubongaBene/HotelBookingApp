@@ -17,6 +17,7 @@ const Stack = createNativeStackNavigator();
 
 export default function Preview({navigation }){
 
+
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -25,6 +26,8 @@ export default function Preview({navigation }){
         </TouchableOpacity>
       )
     })
+
+    retrieveRooms();
   })
 
     const [modalVisible, setModalVisible] = useState(false);
@@ -32,6 +35,30 @@ export default function Preview({navigation }){
     const [hotelDetails, setHotelDetails] = useState({});
     const [roomDetails, setRoomDetails] = useState([]);
 
+    const retrieveRooms = () =>{
+      database().ref('Hotels/').on('value', snapshot => {
+        if(snapshot.val() !== null || snapshot.val() !== undefined){
+          //setRoomDetails(snapshot.val());
+        console.log(snapshot.val());
+        let rooms = snapshot.val();
+        let keys = Object.keys(rooms);
+        let temp = new Array()
+        
+        console.log('hey',keys);
+  
+        for(let i = 0; i<keys.length; i++){
+            let tempRoom = rooms[keys[i]]
+            tempRoom.key = keys[i]
+          console.log(tempRoom);
+          temp.push(tempRoom);
+        }
+        setRoomDetails(temp);
+        console.log('this is',temp)
+        }
+        
+      })
+    }
+  
     const handleDatabase=()=>{
 
       for(let i=0; i < data.info.length; i++ ){
@@ -69,7 +96,7 @@ export default function Preview({navigation }){
       
     }
     const displayRoomDetails =() =>{
-      return roomDetails.map((item, index) =>{
+      return hotelDetails.map((item, index) =>{
          return(
         
            <View key={item.key} >

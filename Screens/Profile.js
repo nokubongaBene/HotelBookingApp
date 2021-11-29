@@ -55,11 +55,12 @@ export default function Profile({navigation}){
 
           if(tempBooking.uid === auth().currentUser.uid){
             temp.push(tempBooking)
-          }else {
-            temp.push(tempBooking);
+          }
+          //else {
+            //temp.push(tempBooking);
             //Alert.alert('No bookings for this user.');
            
-          }
+         // }
           //navigation.navigate('Admin');
         }
         console.log("temp is ",temp);

@@ -37,7 +37,7 @@ export default function PaymentModal({showModal, hideModalGF, navigation}){
             <TextInput style={styles.input} onChangeText={setCvv} value={cvv} />
 
             {/* <TouchableOpacity style={styles.textSign} onPress={()=> {hideModalGF();navigation.navigate('PreviewBooking')}} > */}
-            <Button title="Make Payment" style={styles.buttonBlue} onPress={()=>navigation.navigate('ClientBookings') } />
+            <Button title="Make Payment" style={styles.buttonBlue} onPress={()=>navigation.navigate('Profile') } />
           {/* </TouchableOpacity> */}
           </View>
           </View>
